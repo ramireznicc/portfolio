@@ -1,0 +1,59 @@
+[
+  {
+    "name": "Portfolio Website",
+    "description": "This Website! Applying different components and styles with Material UI.",
+    "tools": "React, Material UI",
+    "link": "https://github.com/ramireznicc/ramireznicc.github.io/tree/main"
+  },
+  {
+    "name": "Get Growing",
+    "description": "Functional e-Commerce model made with differents React functionalities.",
+    "tools": "React, Material UI, Firebase",
+    "link": "https://github.com/ramireznicc/get-growing",
+    "live": "https://get-growing.netlify.app"
+  },
+  {
+    "name": "Pokedex",
+    "description": "Pokedex App where you can search a specific pokemon and get information about it.",
+    "tools": "React, Material UI, PokeAPI",
+    "link": "https://github.com/ramireznicc/pokedex",
+    "live": "https://pokedex-x23.netlify.app/"
+  },
+  {
+    "name": "The Weather App",
+    "description": "Minimal and simple Weather app. Getting weather information with the Openweather API.",
+    "tools": "React, Material UI, OpenWeather API",
+    "link": "https://github.com/ramireznicc/weather-app",
+    "live": "https://the-weather-app-23.netlify.app/"
+  },
+  {
+    "name": "Guess the Number",
+    "description": "Funny game with differents levels where you have to try to guess a number. ",
+    "tools": "JS, HTML, CSS",
+    "link": "https://github.com/ramireznicc/guess-the-number"
+  },
+  {
+    "name": "To-do List",
+    "description": "To-do list App with differents functions and saving data in browser memory.",
+    "tools": "JS, HTML, CSS",
+    "link": "https://github.com/ramireznicc/to-do"
+  },
+  {
+    "name": "Calculator",
+    "description": "A functional calculator made from scratch while I was learning CSS.",
+    "tools": "JS, HTML, CSS",
+    "link": "https://github.com/ramireznicc/calculator"
+  },
+  {
+    "name": "Tic-Tac-Toe",
+    "description": "Player vs Player tic-tac-toe game with 'Material Design' style.",
+    "tools": "Android Studio, Kotlin",
+    "link": "https://play.google.com/store/apps/details?id=ramirez.nicc.tateti"
+  },
+  {
+    "name": "Snake",
+    "description": "Simple Snake game applying different functions to make an easily understandable game logic.",
+    "tools": "Python",
+    "link": "https://github.com/ramireznicc/snake"
+  }
+]
