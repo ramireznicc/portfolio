@@ -3,9 +3,7 @@
   height: fit-content;
   border-radius: 22px;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
-  background-color: rgba(255, 255, 255, 0.4);
-  animation: bounceInLeft;
-  animation-duration: 1s;
+  background-color: var(--white-transparent);
   padding: 0.5rem 1rem;
   display: flex;
   flex-direction: column;

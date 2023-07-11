@@ -1,5 +1,5 @@
 .navbar {
-  min-height: 65px;
+  height: 65px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -45,7 +45,7 @@
 }
 
 .page {
-  width: 100%;
+  width: 160px;
   color: var(--text);
   font-size: 1.3rem;
   text-transform: uppercase;
@@ -63,6 +63,11 @@
   gap: 4rem;
 }
 
+.active {
+  font-weight: 800;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+}
+
 @media (min-width: 768px) {
   .navbar-menu-icon {
     display: none;
@@ -75,7 +80,6 @@
     transition: all 0.3s ease-in-out;
   }
   .page:hover {
-    scale: 1.02;
     opacity: 0.6;
   }
 }
