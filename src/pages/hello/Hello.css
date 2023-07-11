@@ -10,4 +10,9 @@
   .title-container {
     width: 320px;
   }
+
+  .hello {
+    gap: 2rem;
+    padding-right: 2.5rem;
+  }
 }

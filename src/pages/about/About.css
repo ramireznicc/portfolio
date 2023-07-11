@@ -1,5 +1,5 @@
 .about-card {
-  width: 380px;
+  width: fit-content;
   height: 600px;
   border-radius: 22px;
   display: flex;
@@ -37,6 +37,7 @@
     height: fit-content;
     gap: 1.8rem;
     padding: 2rem 4rem;
+    overflow: hidden;
   }
   .about-item {
     gap: 2rem;

@@ -4,7 +4,7 @@ import "./Hello.css";
 
 const Hello = () => {
   return (
-    <div className="container">
+    <div className="container hello">
       <Memoji />
       <div className="title-container">
         <Title>NICOLÁS RAMIREZ</Title>

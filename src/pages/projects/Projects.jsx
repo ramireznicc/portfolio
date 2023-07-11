@@ -1,7 +1,13 @@
+import { ProjectCard } from "../../components/index";
+
+import projects from "../../data/projects.json";
+
 const Projects = () => {
   return (
-    <div>
-      <h1>Projects</h1>
+    <div className="container">
+      {projects.map((project) => (
+        <ProjectCard project={project} key={project.name} />
+      ))}
     </div>
   );
 };

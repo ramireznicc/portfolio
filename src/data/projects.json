@@ -1,59 +1,55 @@
 [
   {
-    "name": "Portfolio Website",
-    "description": "This Website! Applying different components and styles with Material UI.",
-    "tools": "React, Material UI",
+    "name": "This Portfolio",
+    "tools": ["ReactJS", "Material UI"],
     "link": "https://github.com/ramireznicc/ramireznicc.github.io/tree/main"
   },
   {
-    "name": "Get Growing",
-    "description": "Functional e-Commerce model made with differents React functionalities.",
-    "tools": "React, Material UI, Firebase",
+    "name": "GetGrowing eCommerce",
+    "tools": ["React", "Material UI", "Firebase"],
     "link": "https://github.com/ramireznicc/get-growing",
-    "live": "https://get-growing.netlify.app"
+    "live": "https://get-growing.netlify.app",
+    "images": [
+      "https://firebasestorage.googleapis.com/v0/b/portfolio-1a438.appspot.com/o/sc-getg-1.png?alt=media&token=e6218261-4273-4e9f-84bf-b452221662d9",
+      "https://firebasestorage.googleapis.com/v0/b/portfolio-1a438.appspot.com/o/sc-getg-2.png?alt=media&token=8feda895-67be-4d08-9867-c78318ce9610",
+      "https://firebasestorage.googleapis.com/v0/b/portfolio-1a438.appspot.com/o/sc-getg-3.png?alt=media&token=5396b541-961a-4eda-a65c-2961057e3f2a"
+    ]
   },
   {
-    "name": "Pokedex",
-    "description": "Pokedex App where you can search a specific pokemon and get information about it.",
-    "tools": "React, Material UI, PokeAPI",
+    "name": "Pokedex App",
+    "tools": ["React", "MaterialUI", "PokeAPI"],
     "link": "https://github.com/ramireznicc/pokedex",
     "live": "https://pokedex-x23.netlify.app/"
   },
   {
     "name": "The Weather App",
-    "description": "Minimal and simple Weather app. Getting weather information with the Openweather API.",
-    "tools": "React, Material UI, OpenWeather API",
+    "tools": ["React", "MaterialUI", "Weather API"],
     "link": "https://github.com/ramireznicc/weather-app",
     "live": "https://the-weather-app-23.netlify.app/"
   },
   {
-    "name": "Guess the Number",
-    "description": "Funny game with differents levels where you have to try to guess a number. ",
-    "tools": "JS, HTML, CSS",
+    "name": "Guess Number Game",
+    "tools": ["JS", "HTML", "CSS"],
     "link": "https://github.com/ramireznicc/guess-the-number"
   },
   {
     "name": "To-do List",
-    "description": "To-do list App with differents functions and saving data in browser memory.",
-    "tools": "JS, HTML, CSS",
+    "tools": ["JS", "HTML", "CSS"],
     "link": "https://github.com/ramireznicc/to-do"
   },
   {
     "name": "Calculator",
-    "description": "A functional calculator made from scratch while I was learning CSS.",
-    "tools": "JS, HTML, CSS",
+    "tools": ["JS", "HTML", "CSS"],
     "link": "https://github.com/ramireznicc/calculator"
   },
   {
     "name": "Tic-Tac-Toe",
-    "description": "Player vs Player tic-tac-toe game with 'Material Design' style.",
-    "tools": "Android Studio, Kotlin",
-    "link": "https://play.google.com/store/apps/details?id=ramirez.nicc.tateti"
+    "tools": ["Android Studio", "Kotlin"],
+    "live": "https://play.google.com/store/apps/details?id=ramirez.nicc.tateti"
   },
   {
-    "name": "Snake",
-    "description": "Simple Snake game applying different functions to make an easily understandable game logic.",
-    "tools": "Python",
+    "name": "Snake Game",
+    "tools": ["Python"],
     "link": "https://github.com/ramireznicc/snake"
   }
 ]

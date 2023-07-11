@@ -47,7 +47,7 @@ const Footer = () => {
           />
         ))}
       </div>
-      <span className="footer-text">{year} All rights reserved ©</span>
+      <span className="footer-text">{year} © All rights reserved </span>
     </div>
   );
 };

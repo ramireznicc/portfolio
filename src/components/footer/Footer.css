@@ -1,12 +1,10 @@
 .footer {
   width: 100%;
+  min-height: 70px;
   flex-direction: column;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-bottom: 1rem;
-  overflow: hidden;
-  gap: 0.3rem;
 }
 
 .footer-icons {
@@ -21,4 +19,5 @@
   opacity: 0.7;
   font-size: 0.9rem;
   color: var(--text-secondary);
+  line-height: 0.7rem;
 }

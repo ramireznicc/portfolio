@@ -1,5 +1,5 @@
 .navbar {
-  height: 65px;
+  min-height: 65px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -7,7 +7,7 @@
 }
 
 .navbar-menu-icon {
-  padding-right: 1rem;
+  padding: 1rem;
 }
 
 .navbar-menu {
