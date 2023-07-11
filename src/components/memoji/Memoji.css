@@ -1,0 +1,15 @@
+.memoji {
+  width: 320px;
+  opacity: 0.95;
+}
+
+@media (min-width: 768px) {
+  .memoji {
+    width: 480px;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .memoji:hover {
+    opacity: 1;
+  }
+}
