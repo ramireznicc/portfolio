@@ -4,6 +4,7 @@
   font-family: "Mukta", sans-serif;
   text-decoration: none;
   list-style: none;
+  user-select: none;
 }
 
 :root {
@@ -13,6 +14,10 @@
   --grey: #dadadb;
   --black-transparent: rgba(0, 0, 0, 0.1);
   --white-transparent: rgba(255, 255, 255, 0.1);
+}
+
+body {
+  background-color: var(--background);
 }
 
 .main-container {
@@ -26,7 +31,6 @@
 
 .container {
   width: 100%;
-  background-color: var(--background);
   padding: 20px;
   display: flex;
   flex-direction: column;

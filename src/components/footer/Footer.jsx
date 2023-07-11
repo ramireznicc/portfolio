@@ -11,6 +11,7 @@ import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 import "./Footer.css";
 
 const Footer = () => {
+  const year = new Date().getFullYear();
   const contactMethods = [
     {
       icon: <FontAwesomeIcon icon={faGithub} />,
@@ -36,9 +37,12 @@ const Footer = () => {
 
   return (
     <div className="footer">
-      {contactMethods.map((method) => (
-        <IconButton key={method.link} icon={method.icon} link={method.link} />
-      ))}
+      <div className="footer-icons">
+        {contactMethods.map((method) => (
+          <IconButton key={method.link} icon={method.icon} link={method.link} />
+        ))}
+      </div>
+      <span className="footer-text">{year} All rights reserved ©</span>
     </div>
   );
 };
