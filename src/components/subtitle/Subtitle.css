@@ -2,7 +2,6 @@
   font-size: 2rem;
   font-weight: 200;
   color: var(--text-secondary);
-  text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
   animation: backInDown;
   animation-duration: 1.3s;
 }

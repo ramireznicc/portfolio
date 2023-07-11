@@ -6,6 +6,7 @@
   justify-content: center;
   padding-bottom: 1rem;
   overflow: hidden;
+  gap: 0.3rem;
 }
 
 .footer-icons {
@@ -14,7 +15,7 @@
   align-items: center;
   justify-content: center;
   gap: 1.7rem;
-  animation: backInRight;
+  animation: backInUp;
   animation-duration: 1s;
 }
 
@@ -22,6 +23,6 @@
   opacity: 0.7;
   font-size: 0.9rem;
   color: var(--text-secondary);
-  animation: backInRight;
-  animation-duration: 1.4s;
+  animation: backInUp;
+  animation-duration: 1.2s;
 }

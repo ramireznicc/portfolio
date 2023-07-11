@@ -1,0 +1,51 @@
+.about-card {
+  width: 380px;
+  height: 600px;
+  border-radius: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  padding: 0 1.5rem;
+  box-shadow: 0 2px 22px 2px var(--black-transparent);
+  animation: fadeIn;
+  animation-duration: 1s;
+}
+
+.about-item {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.about-item-icon {
+  font-size: 1.5rem;
+  color: var(--text-secondary);
+  animation: bounceInLeft;
+  animation-duration: 0.8s;
+}
+
+.about-item-text {
+  font-size: 1.2rem;
+  animation: bounceInRight;
+  animation-duration: 0.8s;
+}
+
+@media (min-width: 768px) {
+  .about-card {
+    width: fit-content;
+    height: fit-content;
+    gap: 1.8rem;
+    padding: 2rem 4rem;
+    overflow: hidden;
+  }
+  .about-item {
+    gap: 2rem;
+  }
+  .about-item-icon {
+    font-size: 1.7rem;
+  }
+  .about-item-text {
+    font-size: 1.4rem;
+  }
+}

@@ -24,7 +24,7 @@ const NavBar = () => {
 
   const handleMenuClose = () => {
     setMenuClass("navbar-menu menu-close-animation");
-    setTimeout(() => setIsMenuOpen(false), 500);
+    setTimeout(() => setIsMenuOpen(false), 250);
   };
 
   const menuPages = [
@@ -52,6 +52,16 @@ const NavBar = () => {
 
   return (
     <div className="navbar">
+      <div className="navbar-pages">
+        {menuPages.map((page) => (
+          <Link key={page.name} to={page.link} onClick={handleMenuClose}>
+            <div className="page">
+              {page.icon}
+              {page.name}
+            </div>
+          </Link>
+        ))}
+      </div>
       <div className="navbar-menu-icon">
         <IconButton
           size={"1.6rem"}
