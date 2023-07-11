@@ -16,7 +16,7 @@
   width: 200px;
   height: 320px;
   background-color: var(--background);
-  box-shadow: 0 2px 22px 2px var(--black-transparent);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
   border-radius: 0 0 0 22px;
   display: flex;
   flex-direction: column;

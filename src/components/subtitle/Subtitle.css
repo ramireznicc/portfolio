@@ -2,6 +2,15 @@
   font-size: 2rem;
   font-weight: 200;
   color: var(--text-secondary);
-  animation: backInDown;
-  animation-duration: 1.3s;
+  animation: bounceInUp;
+  animation-duration: 1.5s;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .subtitle {
+    font-size: 2.5rem;
+    animation: bounceInRight;
+    animation-duration: 1.5s;
+  }
 }

@@ -1,11 +1,13 @@
 .memoji {
   width: 320px;
-  animation: backInLeft;
+  animation: bounceInDown;
   animation-duration: 1.5s;
 }
 
 @media (min-width: 768px) {
   .memoji {
     width: 480px;
+    animation: bounceInLeft;
+    animation-duration: 1.5s;
   }
 }

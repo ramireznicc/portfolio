@@ -7,9 +7,9 @@
   justify-content: center;
   gap: 2rem;
   padding: 0 1.5rem;
-  box-shadow: 0 2px 22px 2px var(--black-transparent);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
   animation: fadeIn;
-  animation-duration: 1s;
+  animation-duration: 1.5s;
 }
 
 .about-item {
@@ -22,13 +22,13 @@
   font-size: 1.5rem;
   color: var(--text-secondary);
   animation: bounceInLeft;
-  animation-duration: 0.8s;
+  animation-duration: 1s;
 }
 
 .about-item-text {
   font-size: 1.2rem;
   animation: bounceInRight;
-  animation-duration: 0.8s;
+  animation-duration: 1s;
 }
 
 @media (min-width: 768px) {

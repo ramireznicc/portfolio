@@ -7,12 +7,14 @@
   letter-spacing: 4px;
   font-weight: 800;
   text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
-  animation: backInDown;
-  animation-duration: 1.5s;
+  animation: bounceInUp;
+  animation-duration: 1s;
 }
 
 @media (min-width: 768px) {
   .title {
     font-size: 5rem;
+    animation: bounceInRight;
+    animation-duration: 1s;
   }
 }
