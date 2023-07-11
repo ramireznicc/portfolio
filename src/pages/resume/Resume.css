@@ -1,0 +1,16 @@
+.resume {
+  height: 524px;
+  width: 380px;
+  border-radius: 22px;
+  animation: bounceInDown;
+  animation-duration: 1.3s;
+}
+
+@media (min-width: 768px) {
+  .resume {
+    height: 600px;
+    width: 800px;
+    animation: bounceInLeft;
+    animation-duration: 1.5s;
+  }
+}

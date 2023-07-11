@@ -4,7 +4,6 @@
   color: var(--text-secondary);
   animation: bounceInUp;
   animation-duration: 1.5s;
-  overflow: hidden;
 }
 
 @media (min-width: 768px) {
