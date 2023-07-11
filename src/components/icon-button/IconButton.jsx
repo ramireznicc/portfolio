@@ -1,10 +1,18 @@
 import "./IconButton.css";
 
-const IconButton = ({ icon, link }) => {
+const IconButton = ({ icon, size, link, onClick }) => {
   return (
-    <a className="icon" href={link} target="_blank" rel="noreferrer">
-      {icon}
-    </a>
+    <button onClick={onClick}>
+      <a
+        style={{ fontSize: `${size}` }}
+        className="icon"
+        href={link}
+        target="_blank"
+        rel="noreferrer"
+      >
+        {icon}
+      </a>
+    </button>
   );
 };
 

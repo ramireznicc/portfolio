@@ -39,7 +39,12 @@ const Footer = () => {
     <div className="footer">
       <div className="footer-icons">
         {contactMethods.map((method) => (
-          <IconButton key={method.link} icon={method.icon} link={method.link} />
+          <IconButton
+            key={method.link}
+            icon={method.icon}
+            link={method.link}
+            size={"1.5rem"}
+          />
         ))}
       </div>
       <span className="footer-text">{year} All rights reserved ©</span>
