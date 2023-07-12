@@ -3,7 +3,7 @@
   height: fit-content;
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
-  background-color: var(--white-transparent);
+  outline: solid 0.5px var(--black-transparent);
   padding: 1rem;
   display: flex;
   flex-direction: column;
@@ -28,6 +28,21 @@
 .project-tool {
   opacity: 0.6;
   line-height: 1.3rem;
+}
+.development {
+  align-self: center;
+  width: fit-content;
+  font-size: 0.9rem;
+  line-height: 0;
+  opacity: 0.6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.1rem 1rem;
+  border-radius: var(--border-radius);
+  outline: solid 1px var(--black-transparent);
+  box-shadow: var(--box-shadow);
 }
 
 .project-buttons {

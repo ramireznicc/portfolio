@@ -2,6 +2,8 @@
   width: 320px;
   animation: bounceInDown;
   animation-duration: 1.5s;
+  border-radius: 50%;
+  box-shadow: var(--box-shadow);
 }
 
 @media (min-width: 768px) {

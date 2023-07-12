@@ -1,0 +1,67 @@
+[
+  {
+    "name": "This Portfolio",
+    "tools": ["React JS", "Vanilla CSS"],
+    "github": "https://github.com/ramireznicc/ramireznicc.github.io/tree/main",
+    "color": "#DCDDDC"
+  },
+  {
+    "name": "Taldea S.A.S.",
+    "tools": ["React JS", "Material UI"],
+    "github": "https://github.com/ramireznicc/taldea",
+    "live": "https://taldea.netlify.app",
+    "inDevelopment": true,
+    "color": "#ACBE47"
+  },
+  {
+    "name": "GetGrowing eCommerce",
+    "tools": ["React JS", "Material UI", "Firebase"],
+    "github": "https://github.com/ramireznicc/get-growing",
+    "live": "https://get-growing.netlify.app",
+    "color": "#C1FBA4"
+  },
+  {
+    "name": "Pokedex App",
+    "tools": ["React JS", "Material UI", "PokeAPI"],
+    "github": "https://github.com/ramireznicc/pokedex",
+    "live": "https://pokedex-x23.netlify.app/",
+    "color": "#ff6664"
+  },
+  {
+    "name": "The Weather App",
+    "tools": ["React JS", "Material UI", "Open Weather API"],
+    "github": "https://github.com/ramireznicc/weather-app",
+    "live": "https://the-weather-app-23.netlify.app/",
+    "color": "#FC2C56"
+  },
+  {
+    "name": "Tic-Tac-Toe",
+    "tools": ["Android Studio", "Kotlin"],
+    "playstore": "https://play.google.com/store/apps/details?id=ramirez.nicc.tateti",
+    "color": "#FFFF7F"
+  },
+  {
+    "name": "How much each?",
+    "tools": ["Android Studio", "Kotlin"],
+    "playstore": "https://play.google.com/store/apps/details?id=ramirez.nicc.paymentcalculator",
+    "color": "#9CDCDC"
+  },
+  {
+    "name": "Guess Number Game",
+    "tools": ["JS", "HTML", "CSS"],
+    "github": "https://github.com/ramireznicc/guess-the-number",
+    "color": "#d8dee9ff"
+  },
+  {
+    "name": "To-do List",
+    "tools": ["JS", "HTML", "CSS"],
+    "github": "https://github.com/ramireznicc/to-do",
+    "color": "#BC86F4"
+  },
+  {
+    "name": "Calculator",
+    "tools": ["JS", "HTML", "CSS"],
+    "github": "https://github.com/ramireznicc/calculator",
+    "color": "#D4896A"
+  }
+]
