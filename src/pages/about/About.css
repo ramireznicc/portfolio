@@ -1,13 +1,13 @@
 .about-card {
-  width: fit-content;
-  height: 600px;
-  border-radius: 22px;
+  width: 100%;
+  height: fit-content;
+  border-radius: var(--border-radius);
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 2rem;
-  padding: 0 1.5rem;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  box-shadow: var(--box-shadow);
   animation: fadeIn;
   animation-duration: 1.5s;
 }

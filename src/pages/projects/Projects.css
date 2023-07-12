@@ -2,10 +2,3 @@
   animation: bounceInLeft;
   animation-duration: 1s;
 }
-
-@media (min-width: 768px) {
-  .projects {
-    animation: bounceInDown;
-    animation-duration: 1s;
-  }
-}

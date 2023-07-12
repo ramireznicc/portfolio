@@ -11,7 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { IconButton } from "../index";
 import "./NavBar.css";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -78,12 +78,15 @@ const NavBar = () => {
           />
           <div className="menu-pages">
             {menuPages.map((page) => (
-              <Link key={page.name} to={page.link} onClick={handleMenuClose}>
-                <div className="page">
-                  {page.icon}
-                  {page.name}
-                </div>
-              </Link>
+              <NavLink
+                className="page"
+                key={page.name}
+                to={page.link}
+                onClick={handleMenuClose}
+              >
+                {page.icon}
+                {page.name}
+              </NavLink>
             ))}
           </div>
         </div>
