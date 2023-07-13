@@ -8,7 +8,7 @@ const Hello = () => {
       <Memoji />
       <div className="title-container">
         <Title>NICOLÁS RAMIREZ</Title>
-        <Subtitle>Frontend Developer</Subtitle>
+        <Subtitle>Front-end Developer</Subtitle>
       </div>
     </div>
   );
