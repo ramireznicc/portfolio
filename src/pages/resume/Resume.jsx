@@ -5,9 +5,10 @@ const Resume = () => {
     <div className="container">
       <iframe
         title="resume"
-        src="https://drive.google.com/file/d/113-jqlah5MXG6BeaTpf0JJ0p6wfcx0SR/preview"
+        src="https://drive.google.com/file/d/1uKKjgZqChfF1AgcV71BKnXcCrAPMh2XB/preview"
         frameborder="0"
         className="resume"
+        allow="autoplay"
       />
     </div>
   );
