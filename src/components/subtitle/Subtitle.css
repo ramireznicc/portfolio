@@ -8,7 +8,7 @@
 
 @media (min-width: 768px) {
   .subtitle {
-    font-size: 2.5rem;
+    font-size: 2.3rem;
     animation: bounceInRight;
     animation-duration: 1.5s;
   }
