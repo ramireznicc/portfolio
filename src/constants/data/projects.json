@@ -6,6 +6,14 @@
     "color": "#DCDDDC"
   },
   {
+    "name": "The Typing Game",
+    "tools": ["React JS", "Vanilla CSS"],
+    "github": "https://github.com/ramireznicc/typing-game",
+    "live": "https://the-typing-game.netlify.app",
+    "inDevelopment": true,
+    "color": "#C9ADA7"
+  },
+  {
     "name": "Taldea S.A.S.",
     "tools": ["React JS", "Material UI"],
     "github": "https://github.com/ramireznicc/taldea",
