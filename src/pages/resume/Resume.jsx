@@ -5,7 +5,7 @@ const Resume = () => {
     <div className="container">
       <iframe
         title="resume"
-        src="https://drive.google.com/file/d/1uKKjgZqChfF1AgcV71BKnXcCrAPMh2XB/preview"
+        src="https://drive.google.com/file/d/1WYkrmaTf2yEmdXZXTzm9fIHG3PkNSUoS/preview"
         frameborder="0"
         className="resume"
         allow="autoplay"
