@@ -1,12 +1,52 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 
-const roles = ['Soporte IT', 'Desarrollador', 'Linuxero']
+function LanguageSwitcher({ onLanguageChange }) {
+  const { i18n } = useTranslation()
+  const isSpanish = i18n.language === 'es'
+
+  const handleToggle = () => {
+    const newLang = isSpanish ? 'en' : 'es'
+    if (onLanguageChange) {
+      onLanguageChange(newLang)
+    } else {
+      i18n.changeLanguage(newLang)
+    }
+  }
+
+  return (
+    <button
+      onClick={handleToggle}
+      className="flex items-center border border-neutral-300 hover:border-neutral-400 rounded-full overflow-hidden transition-colors cursor-pointer"
+      aria-label={isSpanish ? 'Switch to English' : 'Cambiar a Español'}
+    >
+      <span
+        className={`px-3 py-1.5 text-sm font-medium transition-all duration-300 ${
+          isSpanish
+            ? 'bg-neutral-900 text-white'
+            : 'bg-transparent text-neutral-500'
+        }`}
+      >
+        ES
+      </span>
+      <span
+        className={`px-3 py-1.5 text-sm font-medium transition-all duration-300 ${
+          !isSpanish
+            ? 'bg-neutral-900 text-white'
+            : 'bg-transparent text-neutral-500'
+        }`}
+      >
+        EN
+      </span>
+    </button>
+  )
+}
 
 const projects = [
   {
     title: 'Sooma Works',
-    description: 'Sitio web corporativo para ofrecer servicios de soporte IT a empresas y particulares.',
+    descriptionKey: 'projects.items.sooma.description',
     tags: ['React', 'Web Design', 'UI/UX'],
     github: 'https://github.com/ramireznicc/sooma',
     demo: 'https://soomaworks.com/',
@@ -14,7 +54,7 @@ const projects = [
   },
   {
     title: 'Simpsons for Fun',
-    description: 'Buscador de capítulos de Los Simpsons con recomendador y lista para llevar registro de los episodios vistos.',
+    descriptionKey: 'projects.items.simpsons.description',
     tags: ['JavaScript', 'API', 'CSS'],
     github: 'https://github.com/ramireznicc/simpsons-for-fun',
     demo: 'https://simpsons-for-fun.netlify.app/',
@@ -22,14 +62,14 @@ const projects = [
   },
   {
     title: 'System Monitor',
-    description: 'Herramienta de monitoreo de sistema para visualizar métricas de rendimiento en tiempo real.',
+    descriptionKey: 'projects.items.monitor.description',
     tags: ['Python', 'Linux', 'CLI'],
     github: 'https://github.com/ramireznicc/monitor',
     color: '#6CB9D8',
   },
   {
     title: 'Get Growing',
-    description: 'E-commerce completo para productos de jardinería con carrito de compras y pasarela de pagos.',
+    descriptionKey: 'projects.items.getgrowing.description',
     tags: ['React', 'E-commerce', 'Node.js'],
     github: 'https://github.com/ramireznicc/get-growing',
     demo: 'https://get-growing.netlify.app/',
@@ -37,7 +77,7 @@ const projects = [
   },
   {
     title: 'Pokedex',
-    description: 'Enciclopedia interactiva de Pokémon consumiendo la PokeAPI con búsqueda y filtros.',
+    descriptionKey: 'projects.items.pokedex.description',
     tags: ['React', 'API', 'CSS'],
     github: 'https://github.com/ramireznicc/pokedex',
     demo: 'https://pokedex-x23.netlify.app/',
@@ -45,7 +85,7 @@ const projects = [
   },
   {
     title: 'Taldea',
-    description: 'Plataforma e-commerce con catálogo de productos, gestión de inventario y checkout.',
+    descriptionKey: 'projects.items.taldea.description',
     tags: ['React', 'E-commerce', 'Firebase'],
     github: 'https://github.com/ramireznicc/taldea',
     demo: 'https://taldea.netlify.app/',
@@ -53,7 +93,7 @@ const projects = [
   },
   {
     title: 'The Typing Game',
-    description: 'Juego para practicar mecanografía con diferentes niveles de dificultad y estadísticas.',
+    descriptionKey: 'projects.items.typing.description',
     tags: ['JavaScript', 'Game', 'CSS'],
     github: 'https://github.com/ramireznicc/typing-game',
     demo: 'https://the-typing-game.netlify.app/',
@@ -83,28 +123,36 @@ const lineReveal = {
   visible: { scaleX: 1, transition: { duration: 0.8, ease: 'easeOut' } }
 }
 
-function Navbar() {
+function Navbar({ onLanguageChange }) {
   const [isOpen, setIsOpen] = useState(false)
+  const { t, i18n } = useTranslation()
+
+  const navItems = [
+    { key: 'about', href: i18n.language === 'es' ? '#sobre-mí' : '#about-me', icon: <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg> },
+    { key: 'projects', href: i18n.language === 'es' ? '#proyectos' : '#projects', icon: <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" /></svg> },
+    { key: 'contact', href: i18n.language === 'es' ? '#contacto' : '#contact', icon: <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg> },
+  ]
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-neutral-50/90 backdrop-blur-md border-b border-neutral-200">
-      <div className="max-w-4xl mx-auto px-6 h-16 flex items-center justify-center md:justify-center">
+      <div className="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Desktop: centered nav */}
-        <div className="hidden md:flex items-center gap-12">
-          {[
-            { name: 'Sobre mí', icon: <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg> },
-            { name: 'Proyectos', icon: <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" /></svg> },
-            { name: 'Contacto', icon: <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg> },
-          ].map((item) => (
+        <div className="hidden md:flex items-center gap-12 flex-1 justify-center">
+          {navItems.map((item) => (
             <a
-              key={item.name}
-              href={`#${item.name.toLowerCase().replace(' ', '-')}`}
+              key={item.key}
+              href={item.href}
               className="flex items-center gap-2 text-sm text-neutral-500 hover:text-neutral-900 transition-colors"
             >
               {item.icon}
-              {item.name}
+              {t(`nav.${item.key}`)}
             </a>
           ))}
+        </div>
+
+        {/* Language switcher - always visible */}
+        <div className="absolute left-6 md:left-auto md:right-6 md:relative">
+          <LanguageSwitcher onLanguageChange={onLanguageChange} />
         </div>
 
         {/* Mobile: hamburger */}
@@ -130,14 +178,10 @@ function Navbar() {
             className="md:hidden border-t border-neutral-200 bg-neutral-50 overflow-hidden"
           >
             <div className="px-6 py-4 flex flex-col gap-4">
-              {[
-                { name: 'Sobre mí', icon: <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg> },
-                { name: 'Proyectos', icon: <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" /></svg> },
-                { name: 'Contacto', icon: <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg> },
-              ].map((item, index) => (
+              {navItems.map((item, index) => (
                 <motion.a
-                  key={item.name}
-                  href={`#${item.name.toLowerCase().replace(' ', '-')}`}
+                  key={item.key}
+                  href={item.href}
                   className="flex items-center gap-2 text-neutral-500 hover:text-neutral-900"
                   onClick={() => setIsOpen(false)}
                   initial={{ opacity: 0, x: -20 }}
@@ -145,7 +189,7 @@ function Navbar() {
                   transition={{ delay: index * 0.1 }}
                 >
                   {item.icon}
-                  {item.name}
+                  {t(`nav.${item.key}`)}
                 </motion.a>
               ))}
             </div>
@@ -157,9 +201,17 @@ function Navbar() {
 }
 
 function Hero() {
+  const { t, i18n } = useTranslation()
+  const roles = t('hero.roles', { returnObjects: true })
   const [roleIndex, setRoleIndex] = useState(0)
   const [displayText, setDisplayText] = useState('')
   const [isDeleting, setIsDeleting] = useState(false)
+
+  useEffect(() => {
+    setDisplayText('')
+    setRoleIndex(0)
+    setIsDeleting(false)
+  }, [i18n.language])
 
   useEffect(() => {
     const currentRole = roles[roleIndex]
@@ -186,7 +238,7 @@ function Hero() {
     }, typeSpeed)
 
     return () => clearTimeout(timeout)
-  }, [displayText, isDeleting, roleIndex])
+  }, [displayText, isDeleting, roleIndex, roles])
 
   return (
     <section className="min-h-screen flex items-center pt-16">
@@ -241,21 +293,21 @@ function Hero() {
               variants={fadeUp}
               className="text-xl text-neutral-600 mb-10 max-w-lg leading-relaxed"
             >
-              Apasionado por la tecnología.<br />Entusiasta de Linux y el software libre.
+              {t('hero.tagline')}<br />{t('hero.tagline2')}
             </motion.p>
 
             <motion.div variants={fadeUp} className="flex gap-5 flex-wrap justify-center md:justify-start mb-8">
               <a
-                href="#proyectos"
+                href={i18n.language === 'es' ? '#proyectos' : '#projects'}
                 className="px-8 py-4 bg-neutral-900 text-white font-medium hover:bg-neutral-700 transition-colors"
               >
-                Ver proyectos
+                {t('hero.viewProjects')}
               </a>
               <a
-                href="#contacto"
+                href={i18n.language === 'es' ? '#contacto' : '#contact'}
                 className="px-8 py-4 border border-neutral-300 font-medium hover:border-neutral-900 transition-colors"
               >
-                Contacto
+                {t('hero.contact')}
               </a>
             </motion.div>
 
@@ -269,7 +321,7 @@ function Hero() {
                 <svg className="w-5 h-5 group-hover:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
-                CV Español
+                {t('hero.cvSpanish')}
               </a>
               <a
                 href="/nico_ramirez_CV_EN.pdf"
@@ -279,7 +331,7 @@ function Hero() {
                 <svg className="w-5 h-5 group-hover:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
-                CV English
+                {t('hero.cvEnglish')}
               </a>
             </motion.div>
           </div>
@@ -290,8 +342,10 @@ function Hero() {
 }
 
 function About() {
+  const { t, i18n } = useTranslation()
+
   return (
-    <section id="sobre-mí" className="py-24 md:py-32 bg-white border-y border-neutral-200">
+    <section id={i18n.language === 'es' ? 'sobre-mí' : 'about-me'} className="py-24 md:py-32 bg-white border-y border-neutral-200">
       <div className="max-w-4xl mx-auto px-6">
         <motion.div
           initial="hidden"
@@ -305,27 +359,19 @@ function About() {
             variants={fadeUp}
             className="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-12"
           >
-            Sobre mí
+            {t('about.title')}
           </motion.h2>
 
           <div className="max-w-3xl">
             <motion.div variants={fadeUp} className="text-neutral-600 space-y-4">
-              <p className="leading-relaxed">
-                Soy Nico, especialista en soporte IT y desarrollador viviendo en Rosario, Argentina. Después de seis años viviendo y trabajando en Barcelona y Berlín, regresé a casa con experiencia gestionando entornos tecnológicos de gran escala y un enfoque práctico para resolver problemas complejos.
-              </p>
-              <p className="leading-relaxed">
-                Soy usuario diario de Linux, lo que me dió un entendimiento profundo de sistemas operativos y me mantiene constantemente aprendiendo. Esta experiencia con Linux me permite troubleshootear problemas desde la raíz y personalizar entornos de trabajo según las necesidades específicas de cada proyecto.
-              </p>
-              <p className="leading-relaxed">
-                Más allá de lo técnico, me apasiona la intersección entre tecnología y creatividad. Toco la guitarra y el piano, y soy fanático de la literatura fantástica.
-              </p>
-              <p className="leading-relaxed">
-                Creo que las mejores soluciones técnicas vienen de entender a las personas detrás de los problemas.
-              </p>
+              <p className="leading-relaxed">{t('about.p1')}</p>
+              <p className="leading-relaxed">{t('about.p2')}</p>
+              <p className="leading-relaxed">{t('about.p3')}</p>
+              <p className="leading-relaxed">{t('about.p4')}</p>
             </motion.div>
 
             <motion.div variants={fadeUp} className="mt-10">
-              <h3 className="font-heading font-semibold mb-4">Tecnologías</h3>
+              <h3 className="font-heading font-semibold mb-4">{t('about.technologies')}</h3>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                 {skills.map((skill) => (
                   <div
@@ -346,8 +392,10 @@ function About() {
 }
 
 function Projects() {
+  const { t, i18n } = useTranslation()
+
   return (
-    <section id="proyectos" className="py-24 md:py-32 bg-neutral-50">
+    <section id={i18n.language === 'es' ? 'proyectos' : 'projects'} className="py-24 md:py-32 bg-neutral-50">
       <div className="max-w-4xl mx-auto px-6">
         <motion.div
           initial="hidden"
@@ -361,7 +409,7 @@ function Projects() {
             variants={fadeUp}
             className="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-12"
           >
-            Proyectos
+            {t('projects.title')}
           </motion.h2>
 
           <div className="grid gap-8">
@@ -389,7 +437,7 @@ function Projects() {
                           {project.title}
                         </h3>
                         <p className="text-neutral-600 mb-4 leading-relaxed">
-                          {project.description}
+                          {t(project.descriptionKey)}
                         </p>
                       </div>
 
@@ -416,7 +464,7 @@ function Projects() {
                               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                               </svg>
-                              Ver demo
+                              {t('projects.viewDemo')}
                             </a>
                           )}
                           <a
@@ -428,7 +476,7 @@ function Projects() {
                             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                               <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
                             </svg>
-                            Ver código
+                            {t('projects.viewCode')}
                           </a>
                         </div>
                       </div>
@@ -475,6 +523,7 @@ function Toast({ message, isVisible, type = 'success' }) {
 }
 
 function Contact() {
+  const { t, i18n } = useTranslation()
   const [formStatus, setFormStatus] = useState('idle') // idle, sending, success, error
   const [showToast, setShowToast] = useState(false)
   const [toastMessage, setToastMessage] = useState('')
@@ -486,7 +535,7 @@ function Contact() {
 
     const formData = new FormData(e.target)
     formData.append('access_key', 'c5ed2790-4209-446b-a679-1d3238399930')
-    formData.append('subject', 'Nuevo mensaje desde tu portfolio')
+    formData.append('subject', t('contact.emailSubject'))
 
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
@@ -497,7 +546,7 @@ function Contact() {
       if (response.ok) {
         setFormStatus('success')
         e.target.reset()
-        setToastMessage('Mensaje enviado')
+        setToastMessage(t('contact.toast.success'))
         setToastType('success')
         setShowToast(true)
         setTimeout(() => {
@@ -506,7 +555,7 @@ function Contact() {
         }, 3000)
       } else {
         setFormStatus('error')
-        setToastMessage('Error al enviar')
+        setToastMessage(t('contact.toast.error'))
         setToastType('error')
         setShowToast(true)
         setTimeout(() => {
@@ -516,7 +565,7 @@ function Contact() {
       }
     } catch {
       setFormStatus('error')
-      setToastMessage('Error al enviar')
+      setToastMessage(t('contact.toast.error'))
       setToastType('error')
       setShowToast(true)
       setTimeout(() => {
@@ -527,7 +576,7 @@ function Contact() {
   }
 
   return (
-    <section id="contacto" className="py-24 md:py-32 bg-white border-t border-neutral-200">
+    <section id={i18n.language === 'es' ? 'contacto' : 'contact'} className="py-24 md:py-32 bg-white border-t border-neutral-200">
       <div className="max-w-5xl mx-auto px-6">
         <motion.div
           initial="hidden"
@@ -541,11 +590,11 @@ function Contact() {
             variants={fadeUp}
             className="font-heading text-4xl md:text-5xl font-bold tracking-tight mb-6 text-center"
           >
-            Contacto
+            {t('contact.title')}
           </motion.h2>
 
           <motion.p variants={fadeUp} className="text-lg text-neutral-600 mb-16 text-center max-w-xl mx-auto">
-            ¿Trabajamos juntos? Charlemos.
+            {t('contact.subtitle')}
           </motion.p>
 
           <div className="grid md:grid-cols-2 gap-16 md:gap-20">
@@ -556,38 +605,38 @@ function Contact() {
               onSubmit={handleSubmit}
             >
               <div>
-                <label className="block text-sm font-medium mb-2">Nombre</label>
+                <label className="block text-sm font-medium mb-2">{t('contact.form.name')}</label>
                 <input
                   type="text"
                   name="name"
                   required
                   disabled={formStatus === 'sending'}
                   className="w-full px-5 py-4 bg-white border border-neutral-300 focus:border-neutral-900 focus:outline-none transition-colors text-lg disabled:opacity-50"
-                  placeholder="Tu nombre"
+                  placeholder={t('contact.form.namePlaceholder')}
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2">Email</label>
+                <label className="block text-sm font-medium mb-2">{t('contact.form.email')}</label>
                 <input
                   type="email"
                   name="email"
                   required
                   disabled={formStatus === 'sending'}
                   className="w-full px-5 py-4 bg-white border border-neutral-300 focus:border-neutral-900 focus:outline-none transition-colors text-lg disabled:opacity-50"
-                  placeholder="tu@email.com"
+                  placeholder={t('contact.form.emailPlaceholder')}
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2">Mensaje</label>
+                <label className="block text-sm font-medium mb-2">{t('contact.form.message')}</label>
                 <textarea
                   name="message"
                   rows={5}
                   required
                   disabled={formStatus === 'sending'}
                   className="w-full px-5 py-4 bg-white border border-neutral-300 focus:border-neutral-900 focus:outline-none transition-colors resize-none text-lg disabled:opacity-50"
-                  placeholder="Contame lo que necesites..."
+                  placeholder={t('contact.form.messagePlaceholder')}
                 />
               </div>
 
@@ -626,7 +675,7 @@ function Contact() {
                         d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                       />
                     </motion.svg>
-                    <span>Enviando</span>
+                    <span>{t('contact.button.sending')}</span>
                   </>
                 )}
                 {formStatus === 'success' && (
@@ -638,11 +687,11 @@ function Contact() {
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
-                    Enviado
+                    {t('contact.button.sent')}
                   </motion.span>
                 )}
-                {formStatus === 'error' && 'Reintentar'}
-                {formStatus === 'idle' && 'Enviar mensaje'}
+                {formStatus === 'error' && t('contact.button.retry')}
+                {formStatus === 'idle' && t('contact.button.idle')}
               </motion.button>
             </motion.form>
 
@@ -652,7 +701,7 @@ function Contact() {
               className="flex flex-col justify-center"
             >
               <h3 className="font-heading text-xl font-semibold mb-8 text-center md:text-left">
-                También podés encontrarme en
+                {t('contact.social')}
               </h3>
 
               <div className="flex flex-col gap-6">
@@ -745,15 +794,30 @@ function Footer() {
 }
 
 function App() {
+  const { i18n } = useTranslation()
+  const [isTransitioning, setIsTransitioning] = useState(false)
+
+  const handleLanguageChange = (newLang) => {
+    setIsTransitioning(true)
+    setTimeout(() => {
+      i18n.changeLanguage(newLang)
+      setTimeout(() => setIsTransitioning(false), 200)
+    }, 200)
+  }
+
   return (
-    <div className="min-h-screen">
-      <Navbar />
+    <motion.div
+      className="min-h-screen"
+      animate={{ filter: isTransitioning ? 'blur(10px)' : 'blur(0px)' }}
+      transition={{ duration: 0.2, ease: 'easeInOut' }}
+    >
+      <Navbar onLanguageChange={handleLanguageChange} />
       <Hero />
       <About />
       <Projects />
       <Contact />
       <Footer />
-    </div>
+    </motion.div>
   )
 }
 

@@ -1,0 +1,76 @@
+{
+  "nav": {
+    "about": "Sobre mí",
+    "projects": "Proyectos",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "roles": ["Soporte IT", "Desarrollador", "Linuxero"],
+    "tagline": "Apasionado por la tecnología.",
+    "tagline2": "Entusiasta de Linux y el software libre.",
+    "viewProjects": "Ver proyectos",
+    "contact": "Contacto",
+    "cvSpanish": "CV Español",
+    "cvEnglish": "CV English"
+  },
+  "about": {
+    "title": "Sobre mí",
+    "p1": "Soy Nico, especialista en soporte IT y desarrollador viviendo en Rosario, Argentina. Después de seis años viviendo y trabajando en Barcelona y Berlín, regresé a casa con experiencia gestionando entornos tecnológicos de gran escala y un enfoque práctico para resolver problemas complejos.",
+    "p2": "Soy usuario diario de Linux, lo que me dió un entendimiento profundo de sistemas operativos y me mantiene constantemente aprendiendo. Esta experiencia con Linux me permite troubleshootear problemas desde la raíz y personalizar entornos de trabajo según las necesidades específicas de cada proyecto.",
+    "p3": "Más allá de lo técnico, me apasiona la intersección entre tecnología y creatividad. Toco la guitarra y el piano, y soy fanático de la literatura fantástica.",
+    "p4": "Creo que las mejores soluciones técnicas vienen de entender a las personas detrás de los problemas.",
+    "technologies": "Tecnologías"
+  },
+  "projects": {
+    "title": "Proyectos",
+    "viewDemo": "Ver demo",
+    "viewCode": "Ver código",
+    "items": {
+      "sooma": {
+        "description": "Sitio web corporativo para ofrecer servicios de soporte IT a empresas y particulares."
+      },
+      "simpsons": {
+        "description": "Buscador de capítulos de Los Simpsons con recomendador y lista para llevar registro de los episodios vistos."
+      },
+      "monitor": {
+        "description": "Herramienta de monitoreo de sistema para visualizar métricas de rendimiento en tiempo real."
+      },
+      "getgrowing": {
+        "description": "E-commerce completo para productos de jardinería con carrito de compras y pasarela de pagos."
+      },
+      "pokedex": {
+        "description": "Enciclopedia interactiva de Pokémon consumiendo la PokeAPI con búsqueda y filtros."
+      },
+      "taldea": {
+        "description": "Plataforma e-commerce con catálogo de productos, gestión de inventario y checkout."
+      },
+      "typing": {
+        "description": "Juego para practicar mecanografía con diferentes niveles de dificultad y estadísticas."
+      }
+    }
+  },
+  "contact": {
+    "title": "Contacto",
+    "subtitle": "¿Trabajamos juntos? Charlemos.",
+    "form": {
+      "name": "Nombre",
+      "email": "Email",
+      "message": "Mensaje",
+      "namePlaceholder": "Tu nombre",
+      "emailPlaceholder": "tu@email.com",
+      "messagePlaceholder": "Contame lo que necesites..."
+    },
+    "button": {
+      "idle": "Enviar mensaje",
+      "sending": "Enviando",
+      "sent": "Enviado",
+      "retry": "Reintentar"
+    },
+    "toast": {
+      "success": "Mensaje enviado",
+      "error": "Error al enviar"
+    },
+    "social": "También podés encontrarme en",
+    "emailSubject": "Nuevo mensaje desde tu portfolio"
+  }
+}

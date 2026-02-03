@@ -1,0 +1,76 @@
+{
+  "nav": {
+    "about": "About me",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "hero": {
+    "roles": ["IT Support", "Developer", "I use Linux, btw"],
+    "tagline": "Passionate about technology.",
+    "tagline2": "Linux and open source enthusiast.",
+    "viewProjects": "View projects",
+    "contact": "Contact",
+    "cvSpanish": "CV Spanish",
+    "cvEnglish": "CV English"
+  },
+  "about": {
+    "title": "About me",
+    "p1": "I'm Nico, an IT support specialist and developer living in Rosario, Argentina. After six years living and working in Barcelona and Berlin, I returned home with experience managing large-scale tech environments and a hands-on approach to solving complex problems.",
+    "p2": "I'm a daily Linux user, which gave me a deep understanding of operating systems and keeps me constantly learning. This experience with Linux allows me to troubleshoot problems from the root and customize work environments according to each project's specific needs.",
+    "p3": "Beyond the technical side, I'm passionate about the intersection of technology and creativity. I play guitar and piano, and I'm a fan of fantasy literature.",
+    "p4": "I believe the best technical solutions come from understanding the people behind the problems.",
+    "technologies": "Technologies"
+  },
+  "projects": {
+    "title": "Projects",
+    "viewDemo": "View demo",
+    "viewCode": "View code",
+    "items": {
+      "sooma": {
+        "description": "Corporate website offering IT support services to businesses and individuals."
+      },
+      "simpsons": {
+        "description": "Simpsons episode finder with recommendations and a list to track watched episodes."
+      },
+      "monitor": {
+        "description": "System monitoring tool to visualize real-time performance metrics."
+      },
+      "getgrowing": {
+        "description": "Full e-commerce for gardening products with shopping cart and payment gateway."
+      },
+      "pokedex": {
+        "description": "Interactive Pokémon encyclopedia consuming the PokeAPI with search and filters."
+      },
+      "taldea": {
+        "description": "E-commerce platform with product catalog, inventory management and checkout."
+      },
+      "typing": {
+        "description": "Typing practice game with different difficulty levels and statistics."
+      }
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Want to work together? Let's chat.",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "namePlaceholder": "Your name",
+      "emailPlaceholder": "you@email.com",
+      "messagePlaceholder": "Tell me what you need..."
+    },
+    "button": {
+      "idle": "Send message",
+      "sending": "Sending",
+      "sent": "Sent",
+      "retry": "Retry"
+    },
+    "toast": {
+      "success": "Message sent",
+      "error": "Error sending"
+    },
+    "social": "You can also find me on",
+    "emailSubject": "New message from your portfolio"
+  }
+}
