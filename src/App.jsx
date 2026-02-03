@@ -1,29 +1,31 @@
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+
+const roles = ['Soporte IT', 'Desarrollador', 'Linuxero']
 
 const projects = [
   {
     title: 'Sooma Works',
-    description: 'Sitio web corporativo con diseño moderno y responsive para mostrar servicios y portafolio de trabajos.',
+    description: 'Sitio web corporativo para ofrecer servicios de soporte IT a empresas y particulares.',
     tags: ['React', 'Web Design', 'UI/UX'],
     github: 'https://github.com/ramireznicc/sooma',
     demo: 'https://soomaworks.com/',
-    image: '/sooma.png',
+    color: '#554C64',
   },
   {
     title: 'Simpsons for Fun',
-    description: 'Aplicación interactiva temática de Los Simpsons con contenido divertido y animaciones.',
+    description: 'Buscador de capítulos de Los Simpsons con recomendador y lista para llevar registro de los episodios vistos.',
     tags: ['JavaScript', 'API', 'CSS'],
     github: 'https://github.com/ramireznicc/simpsons-for-fun',
     demo: 'https://simpsons-for-fun.netlify.app/',
-    image: '/simpsons.png',
+    color: '#FDD427',
   },
   {
     title: 'System Monitor',
     description: 'Herramienta de monitoreo de sistema para visualizar métricas de rendimiento en tiempo real.',
     tags: ['Python', 'Linux', 'CLI'],
     github: 'https://github.com/ramireznicc/monitor',
-    image: '/system-monitor.png',
+    color: '#6CB9D8',
   },
   {
     title: 'Get Growing',
@@ -31,7 +33,7 @@ const projects = [
     tags: ['React', 'E-commerce', 'Node.js'],
     github: 'https://github.com/ramireznicc/get-growing',
     demo: 'https://get-growing.netlify.app/',
-    image: '/get-growing.png',
+    color: '#A0C088',
   },
   {
     title: 'Pokedex',
@@ -39,7 +41,7 @@ const projects = [
     tags: ['React', 'API', 'CSS'],
     github: 'https://github.com/ramireznicc/pokedex',
     demo: 'https://pokedex-x23.netlify.app/',
-    image: '/pokedex.png',
+    color: '#B94A49',
   },
   {
     title: 'Taldea',
@@ -47,7 +49,7 @@ const projects = [
     tags: ['React', 'E-commerce', 'Firebase'],
     github: 'https://github.com/ramireznicc/taldea',
     demo: 'https://taldea.netlify.app/',
-    image: '/taldea.png',
+    color: '#7C8654',
   },
   {
     title: 'The Typing Game',
@@ -55,7 +57,7 @@ const projects = [
     tags: ['JavaScript', 'Game', 'CSS'],
     github: 'https://github.com/ramireznicc/typing-game',
     demo: 'https://the-typing-game.netlify.app/',
-    image: '/typing-game.png',
+    color: '#447D6D',
   },
 ]
 
@@ -72,8 +74,13 @@ const skills = [
 ]
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+  hidden: { opacity: 0, y: 20, filter: 'blur(5px)' },
+  visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.6 } }
+}
+
+const lineReveal = {
+  hidden: { scaleX: 0 },
+  visible: { scaleX: 1, transition: { duration: 0.8, ease: 'easeOut' } }
 }
 
 function Navbar() {
@@ -82,20 +89,20 @@ function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-neutral-50/90 backdrop-blur-md border-b border-neutral-200">
       <div className="max-w-4xl mx-auto px-6 h-16 flex items-center justify-center md:justify-center">
-        {/* Mobile: logo */}
-        <a href="#" className="md:hidden font-heading font-bold text-xl tracking-tight">
-          NR<span className="text-neutral-400">.</span>
-        </a>
-
         {/* Desktop: centered nav */}
         <div className="hidden md:flex items-center gap-12">
-          {['Sobre mí', 'Proyectos', 'Contacto'].map((item) => (
+          {[
+            { name: 'Sobre mí', icon: <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg> },
+            { name: 'Proyectos', icon: <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" /></svg> },
+            { name: 'Contacto', icon: <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg> },
+          ].map((item) => (
             <a
-              key={item}
-              href={`#${item.toLowerCase().replace(' ', '-')}`}
-              className="text-sm text-neutral-500 hover:text-neutral-900 transition-colors"
+              key={item.name}
+              href={`#${item.name.toLowerCase().replace(' ', '-')}`}
+              className="flex items-center gap-2 text-sm text-neutral-500 hover:text-neutral-900 transition-colors"
             >
-              {item}
+              {item.icon}
+              {item.name}
             </a>
           ))}
         </div>
@@ -116,14 +123,19 @@ function Navbar() {
       {isOpen && (
         <div className="md:hidden border-t border-neutral-200 bg-neutral-50">
           <div className="px-6 py-4 flex flex-col gap-4">
-            {['Sobre mí', 'Proyectos', 'Contacto'].map((item) => (
+            {[
+              { name: 'Sobre mí', icon: <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg> },
+              { name: 'Proyectos', icon: <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" /></svg> },
+              { name: 'Contacto', icon: <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg> },
+            ].map((item) => (
               <a
-                key={item}
-                href={`#${item.toLowerCase().replace(' ', '-')}`}
-                className="text-neutral-500 hover:text-neutral-900"
+                key={item.name}
+                href={`#${item.name.toLowerCase().replace(' ', '-')}`}
+                className="flex items-center gap-2 text-neutral-500 hover:text-neutral-900"
                 onClick={() => setIsOpen(false)}
               >
-                {item}
+                {item.icon}
+                {item.name}
               </a>
             ))}
           </div>
@@ -134,6 +146,37 @@ function Navbar() {
 }
 
 function Hero() {
+  const [roleIndex, setRoleIndex] = useState(0)
+  const [displayText, setDisplayText] = useState('')
+  const [isDeleting, setIsDeleting] = useState(false)
+
+  useEffect(() => {
+    const currentRole = roles[roleIndex]
+    const typeSpeed = isDeleting ? 50 : 100
+    const pauseTime = 2000
+
+    if (!isDeleting && displayText === currentRole) {
+      setTimeout(() => setIsDeleting(true), pauseTime)
+      return
+    }
+
+    if (isDeleting && displayText === '') {
+      setIsDeleting(false)
+      setRoleIndex((prev) => (prev + 1) % roles.length)
+      return
+    }
+
+    const timeout = setTimeout(() => {
+      setDisplayText(prev =>
+        isDeleting
+          ? currentRole.substring(0, prev.length - 1)
+          : currentRole.substring(0, prev.length + 1)
+      )
+    }, typeSpeed)
+
+    return () => clearTimeout(timeout)
+  }, [displayText, isDeleting, roleIndex])
+
   return (
     <section className="min-h-screen flex items-center pt-16">
       <div className="max-w-5xl mx-auto px-6 py-24 md:py-32 w-full">
@@ -169,6 +212,13 @@ function Hero() {
 
           {/* Text content */}
           <div className="flex-1 text-center md:text-left">
+            <motion.div variants={fadeUp} className="mb-4 h-8 md:pl-1">
+              <span className="text-sm font-medium tracking-tight text-neutral-500">
+                {displayText}
+                <span className="animate-pulse">|</span>
+              </span>
+            </motion.div>
+
             <motion.h1
               variants={fadeUp}
               className="font-heading text-6xl md:text-8xl font-bold tracking-tight mb-8"
@@ -307,30 +357,21 @@ function Projects() {
             {projects.map((project) => (
               <motion.article
                 key={project.title}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-50px" }}
                 variants={fadeUp}
                 className="group border border-neutral-200 hover:border-neutral-400 transition-colors overflow-hidden"
               >
-                <div className="flex flex-col md:flex-row">
-                  {/* Screenshot placeholder */}
-                  <div className="md:w-72 aspect-video bg-neutral-100 flex items-center justify-center border-b md:border-b-0 md:border-r border-neutral-200 shrink-0">
-                    {project.image ? (
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <div className="text-center text-neutral-400 p-4">
-                        <svg className="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                        <span className="text-xs">Screenshot</span>
-                      </div>
-                    )}
-                  </div>
+                {/* Color accent line */}
+                <motion.div
+                  variants={lineReveal}
+                  className="h-1 origin-left"
+                  style={{ backgroundColor: project.color }}
+                />
 
-                  {/* Content */}
-                  <div className="flex-1 p-6 md:p-8">
+                {/* Content */}
+                <div className="p-6 md:p-8">
                     <div className="flex flex-col h-full">
                       <div className="flex-1">
                         <h3 className="font-heading text-xl font-semibold mb-3 group-hover:text-neutral-600 transition-colors">
@@ -353,15 +394,15 @@ function Projects() {
                           ))}
                         </div>
 
-                        <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-3">
                           {project.demo && (
                             <a
                               href={project.demo}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center gap-2 text-sm text-neutral-500 hover:text-neutral-900 transition-colors"
+                              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-neutral-700 border border-neutral-300 hover:border-neutral-400 hover:bg-neutral-100 transition-colors"
                             >
-                              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                               </svg>
                               Ver demo
@@ -371,9 +412,9 @@ function Projects() {
                             href={project.github}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 text-sm text-neutral-500 hover:text-neutral-900 transition-colors"
+                            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-neutral-700 border border-neutral-300 hover:border-neutral-400 hover:bg-neutral-100 transition-colors"
                           >
-                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                               <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
                             </svg>
                             Ver código
@@ -382,7 +423,6 @@ function Projects() {
                       </div>
                     </div>
                   </div>
-                </div>
               </motion.article>
             ))}
           </div>
@@ -412,7 +452,7 @@ function Contact() {
           </motion.h2>
 
           <motion.p variants={fadeUp} className="text-lg text-neutral-600 mb-16 text-center max-w-xl mx-auto">
-            Si tenés alguna consulta o simplemente querés charlar, escribime.
+            ¿Trabajamos juntos? Charlemos.
           </motion.p>
 
           <div className="grid md:grid-cols-2 gap-16 md:gap-20">
@@ -539,8 +579,8 @@ function Contact() {
 
 function Footer() {
   return (
-    <footer className="py-8 border-t border-neutral-200">
-      <div className="max-w-4xl mx-auto px-6">
+    <footer className="py-8 border-t border-neutral-200 bg-neutral-50">
+      <div className="max-w-4xl mx-auto px-6 text-center">
         <p className="text-sm text-neutral-500">
           © {new Date().getFullYear()} Nicolás Ramírez
         </p>
