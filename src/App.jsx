@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useEffect } from 'react'
 
 const roles = ['Soporte IT', 'Desarrollador', 'Linuxero']
@@ -113,34 +113,45 @@ function Navbar() {
           onClick={() => setIsOpen(!isOpen)}
         >
           <div className="w-5 h-4 flex flex-col justify-between">
-            <span className={`h-0.5 w-full bg-neutral-900 transition-all ${isOpen ? 'rotate-45 translate-y-[7px]' : ''}`} />
-            <span className={`h-0.5 w-full bg-neutral-900 transition-all ${isOpen ? 'opacity-0' : ''}`} />
-            <span className={`h-0.5 w-full bg-neutral-900 transition-all ${isOpen ? '-rotate-45 -translate-y-[7px]' : ''}`} />
+            <span className={`h-0.5 w-full bg-neutral-900 transition-all duration-300 origin-center ${isOpen ? 'rotate-45 translate-y-[7px]' : ''}`} />
+            <span className={`h-0.5 bg-neutral-900 transition-all duration-300 ${isOpen ? 'w-0 opacity-0' : 'w-full'}`} />
+            <span className={`h-0.5 w-full bg-neutral-900 transition-all duration-300 origin-center ${isOpen ? '-rotate-45 -translate-y-[7px]' : ''}`} />
           </div>
         </button>
       </div>
 
-      {isOpen && (
-        <div className="md:hidden border-t border-neutral-200 bg-neutral-50">
-          <div className="px-6 py-4 flex flex-col gap-4">
-            {[
-              { name: 'Sobre mí', icon: <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg> },
-              { name: 'Proyectos', icon: <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" /></svg> },
-              { name: 'Contacto', icon: <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg> },
-            ].map((item) => (
-              <a
-                key={item.name}
-                href={`#${item.name.toLowerCase().replace(' ', '-')}`}
-                className="flex items-center gap-2 text-neutral-500 hover:text-neutral-900"
-                onClick={() => setIsOpen(false)}
-              >
-                {item.icon}
-                {item.name}
-              </a>
-            ))}
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="md:hidden border-t border-neutral-200 bg-neutral-50 overflow-hidden"
+          >
+            <div className="px-6 py-4 flex flex-col gap-4">
+              {[
+                { name: 'Sobre mí', icon: <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg> },
+                { name: 'Proyectos', icon: <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" /></svg> },
+                { name: 'Contacto', icon: <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg> },
+              ].map((item, index) => (
+                <motion.a
+                  key={item.name}
+                  href={`#${item.name.toLowerCase().replace(' ', '-')}`}
+                  className="flex items-center gap-2 text-neutral-500 hover:text-neutral-900"
+                  onClick={() => setIsOpen(false)}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  {item.icon}
+                  {item.name}
+                </motion.a>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   )
 }
@@ -457,11 +468,22 @@ function Contact() {
 
           <div className="grid md:grid-cols-2 gap-16 md:gap-20">
             {/* Form */}
-            <motion.form variants={fadeUp} className="flex flex-col gap-6">
+            <motion.form
+              variants={fadeUp}
+              className="flex flex-col gap-6"
+              action="https://api.web3forms.com/submit"
+              method="POST"
+            >
+              <input type="hidden" name="access_key" value="c5ed2790-4209-446b-a679-1d3238399930" />
+              <input type="hidden" name="subject" value="Nuevo mensaje desde tu portfolio" />
+              <input type="hidden" name="redirect" value="https://web3forms.com/success" />
+
               <div>
                 <label className="block text-sm font-medium mb-2">Nombre</label>
                 <input
                   type="text"
+                  name="name"
+                  required
                   className="w-full px-5 py-4 bg-white border border-neutral-300 focus:border-neutral-900 focus:outline-none transition-colors text-lg"
                   placeholder="Tu nombre"
                 />
@@ -471,6 +493,8 @@ function Contact() {
                 <label className="block text-sm font-medium mb-2">Email</label>
                 <input
                   type="email"
+                  name="email"
+                  required
                   className="w-full px-5 py-4 bg-white border border-neutral-300 focus:border-neutral-900 focus:outline-none transition-colors text-lg"
                   placeholder="tu@email.com"
                 />
@@ -479,9 +503,11 @@ function Contact() {
               <div>
                 <label className="block text-sm font-medium mb-2">Mensaje</label>
                 <textarea
+                  name="message"
                   rows={5}
+                  required
                   className="w-full px-5 py-4 bg-white border border-neutral-300 focus:border-neutral-900 focus:outline-none transition-colors resize-none text-lg"
-                  placeholder="Cuéntame sobre tu proyecto..."
+                  placeholder="Contame lo que necesites..."
                 />
               </div>
 
