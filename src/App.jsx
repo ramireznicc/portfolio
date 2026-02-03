@@ -183,7 +183,17 @@ function Navbar({ onLanguageChange }) {
                   key={item.key}
                   href={item.href}
                   className="flex items-center gap-2 text-neutral-500 hover:text-neutral-900"
-                  onClick={() => setIsOpen(false)}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setIsOpen(false)
+                    const targetId = item.href.replace('#', '')
+                    const targetElement = document.getElementById(targetId)
+                    if (targetElement) {
+                      setTimeout(() => {
+                        targetElement.scrollIntoView({ behavior: 'smooth' })
+                      }, 300)
+                    }
+                  }}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
