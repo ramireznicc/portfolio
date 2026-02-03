@@ -443,7 +443,89 @@ function Projects() {
   )
 }
 
+function Toast({ message, isVisible, type = 'success' }) {
+  return (
+    <AnimatePresence>
+      {isVisible && (
+        <motion.div
+          initial={{ opacity: 0, y: 50, scale: 0.9 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 20, scale: 0.9 }}
+          transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+          className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50"
+        >
+          <div className={`flex items-center gap-3 px-6 py-4 rounded-lg shadow-lg ${
+            type === 'success' ? 'bg-neutral-900 text-white' : 'bg-red-600 text-white'
+          }`}>
+            {type === 'success' ? (
+              <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+            ) : (
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            )}
+            <span className="font-medium">{message}</span>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  )
+}
+
 function Contact() {
+  const [formStatus, setFormStatus] = useState('idle') // idle, sending, success, error
+  const [showToast, setShowToast] = useState(false)
+  const [toastMessage, setToastMessage] = useState('')
+  const [toastType, setToastType] = useState('success')
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setFormStatus('sending')
+
+    const formData = new FormData(e.target)
+    formData.append('access_key', 'c5ed2790-4209-446b-a679-1d3238399930')
+    formData.append('subject', 'Nuevo mensaje desde tu portfolio')
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData
+      })
+
+      if (response.ok) {
+        setFormStatus('success')
+        e.target.reset()
+        setToastMessage('Mensaje enviado')
+        setToastType('success')
+        setShowToast(true)
+        setTimeout(() => {
+          setShowToast(false)
+          setFormStatus('idle')
+        }, 3000)
+      } else {
+        setFormStatus('error')
+        setToastMessage('Error al enviar')
+        setToastType('error')
+        setShowToast(true)
+        setTimeout(() => {
+          setShowToast(false)
+          setFormStatus('idle')
+        }, 3000)
+      }
+    } catch {
+      setFormStatus('error')
+      setToastMessage('Error al enviar')
+      setToastType('error')
+      setShowToast(true)
+      setTimeout(() => {
+        setShowToast(false)
+        setFormStatus('idle')
+      }, 3000)
+    }
+  }
+
   return (
     <section id="contacto" className="py-24 md:py-32 bg-white border-t border-neutral-200">
       <div className="max-w-5xl mx-auto px-6">
@@ -471,20 +553,16 @@ function Contact() {
             <motion.form
               variants={fadeUp}
               className="flex flex-col gap-6"
-              action="https://api.web3forms.com/submit"
-              method="POST"
+              onSubmit={handleSubmit}
             >
-              <input type="hidden" name="access_key" value="c5ed2790-4209-446b-a679-1d3238399930" />
-              <input type="hidden" name="subject" value="Nuevo mensaje desde tu portfolio" />
-              <input type="hidden" name="redirect" value="https://web3forms.com/success" />
-
               <div>
                 <label className="block text-sm font-medium mb-2">Nombre</label>
                 <input
                   type="text"
                   name="name"
                   required
-                  className="w-full px-5 py-4 bg-white border border-neutral-300 focus:border-neutral-900 focus:outline-none transition-colors text-lg"
+                  disabled={formStatus === 'sending'}
+                  className="w-full px-5 py-4 bg-white border border-neutral-300 focus:border-neutral-900 focus:outline-none transition-colors text-lg disabled:opacity-50"
                   placeholder="Tu nombre"
                 />
               </div>
@@ -495,7 +573,8 @@ function Contact() {
                   type="email"
                   name="email"
                   required
-                  className="w-full px-5 py-4 bg-white border border-neutral-300 focus:border-neutral-900 focus:outline-none transition-colors text-lg"
+                  disabled={formStatus === 'sending'}
+                  className="w-full px-5 py-4 bg-white border border-neutral-300 focus:border-neutral-900 focus:outline-none transition-colors text-lg disabled:opacity-50"
                   placeholder="tu@email.com"
                 />
               </div>
@@ -506,17 +585,65 @@ function Contact() {
                   name="message"
                   rows={5}
                   required
-                  className="w-full px-5 py-4 bg-white border border-neutral-300 focus:border-neutral-900 focus:outline-none transition-colors resize-none text-lg"
+                  disabled={formStatus === 'sending'}
+                  className="w-full px-5 py-4 bg-white border border-neutral-300 focus:border-neutral-900 focus:outline-none transition-colors resize-none text-lg disabled:opacity-50"
                   placeholder="Contame lo que necesites..."
                 />
               </div>
 
-              <button
+              <motion.button
                 type="submit"
-                className="w-full py-5 bg-neutral-900 text-white text-lg font-medium hover:bg-neutral-700 transition-colors"
+                disabled={formStatus === 'sending' || formStatus === 'success'}
+                className={`w-full py-5 text-lg font-medium transition-all duration-300 flex items-center justify-center gap-3 ${
+                  formStatus === 'success'
+                    ? 'bg-green-600 text-white'
+                    : formStatus === 'error'
+                    ? 'bg-red-600 text-white hover:bg-red-700'
+                    : 'bg-neutral-900 text-white hover:bg-neutral-700'
+                } disabled:opacity-70`}
+                whileTap={{ scale: formStatus === 'idle' ? 0.98 : 1 }}
               >
-                Enviar mensaje
-              </button>
+                {formStatus === 'sending' && (
+                  <>
+                    <motion.svg
+                      className="w-5 h-5"
+                      viewBox="0 0 24 24"
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                        fill="none"
+                      />
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      />
+                    </motion.svg>
+                    <span>Enviando</span>
+                  </>
+                )}
+                {formStatus === 'success' && (
+                  <motion.span
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    className="flex items-center gap-2"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    Enviado
+                  </motion.span>
+                )}
+                {formStatus === 'error' && 'Reintentar'}
+                {formStatus === 'idle' && 'Enviar mensaje'}
+              </motion.button>
             </motion.form>
 
             {/* Social links */}
@@ -599,6 +726,8 @@ function Contact() {
           </div>
         </motion.div>
       </div>
+
+      <Toast message={toastMessage} isVisible={showToast} type={toastType} />
     </section>
   )
 }
