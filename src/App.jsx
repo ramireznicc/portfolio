@@ -1,5 +1,5 @@
-import { motion, AnimatePresence } from 'framer-motion'
-import { useState, useEffect } from 'react'
+import { motion, AnimatePresence, useMotionValue, useSpring, useMotionTemplate } from 'framer-motion'
+import { useState, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 
 function LanguageSwitcher({ onLanguageChange }) {
@@ -113,6 +113,18 @@ const skills = [
   { name: 'AI Automation', icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.141-.081 4.779-2.758a.795.795 0 0 0 .392-.681v-6.737l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494zM3.6 18.304a4.47 4.47 0 0 1-.535-3.014l.142.085 4.783 2.759a.771.771 0 0 0 .78 0l5.843-3.369v2.332a.08.08 0 0 1-.033.062L9.74 19.95a4.5 4.5 0 0 1-6.14-1.646zM2.34 7.896a4.485 4.485 0 0 1 2.366-1.973V11.6a.766.766 0 0 0 .388.676l5.815 3.355-2.02 1.168a.076.076 0 0 1-.071 0l-4.83-2.786A4.504 4.504 0 0 1 2.34 7.872zm16.597 3.855l-5.833-3.387L15.119 7.2a.076.076 0 0 1 .071 0l4.83 2.791a4.494 4.494 0 0 1-.676 8.105v-5.678a.79.79 0 0 0-.407-.667zm2.01-3.023l-.141-.085-4.774-2.782a.776.776 0 0 0-.785 0L9.409 9.23V6.897a.066.066 0 0 1 .028-.061l4.83-2.787a4.5 4.5 0 0 1 6.68 4.66zm-12.64 4.135l-2.02-1.164a.08.08 0 0 1-.038-.057V6.075a4.5 4.5 0 0 1 7.375-3.453l-.142.08L8.704 5.46a.795.795 0 0 0-.393.681zm1.097-2.365l2.602-1.5 2.607 1.5v2.999l-2.597 1.5-2.607-1.5z"/></svg> },
 ]
 
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false)
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)')
+    setIsMobile(mq.matches)
+    const handler = (e) => setIsMobile(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
+  return isMobile
+}
+
 const fadeUp = {
   hidden: { opacity: 0, y: 20, filter: 'blur(5px)' },
   visible: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.6 } }
@@ -216,7 +228,6 @@ function Hero() {
   const [roleIndex, setRoleIndex] = useState(0)
   const [displayText, setDisplayText] = useState('')
   const [isDeleting, setIsDeleting] = useState(false)
-
   useEffect(() => {
     setDisplayText('')
     setRoleIndex(0)
@@ -251,8 +262,27 @@ function Hero() {
   }, [displayText, isDeleting, roleIndex, roles])
 
   return (
-    <section className="min-h-screen flex items-center pt-16">
-      <div className="max-w-5xl mx-auto px-6 py-24 md:py-32 w-full">
+    <section className="min-h-screen flex items-center pt-16 relative overflow-hidden">
+      {/* Animated monochrome gradient */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none"
+        aria-hidden="true"
+        animate={{
+          background: [
+            'radial-gradient(ellipse at 20% 50%, rgba(200,200,200,0.45) 0%, transparent 55%), radial-gradient(ellipse at 80% 20%, rgba(180,180,180,0.3) 0%, transparent 55%)',
+            'radial-gradient(ellipse at 50% 80%, rgba(200,200,200,0.45) 0%, transparent 55%), radial-gradient(ellipse at 30% 20%, rgba(180,180,180,0.3) 0%, transparent 55%)',
+            'radial-gradient(ellipse at 70% 30%, rgba(200,200,200,0.45) 0%, transparent 55%), radial-gradient(ellipse at 60% 70%, rgba(180,180,180,0.3) 0%, transparent 55%)',
+            'radial-gradient(ellipse at 20% 50%, rgba(200,200,200,0.45) 0%, transparent 55%), radial-gradient(ellipse at 80% 20%, rgba(180,180,180,0.3) 0%, transparent 55%)',
+          ],
+        }}
+        transition={{
+          duration: 15,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+      />
+
+      <div className="max-w-5xl mx-auto px-6 py-24 md:py-32 w-full relative z-10">
         <motion.div
           initial="hidden"
           animate="visible"
@@ -347,6 +377,7 @@ function Hero() {
           </div>
         </motion.div>
       </div>
+
     </section>
   )
 }
@@ -401,12 +432,96 @@ function About() {
   )
 }
 
+function TiltCard({ children, className }) {
+  const ref = useRef(null)
+  const [isHovered, setIsHovered] = useState(false)
+  const tiltX = useMotionValue(0)
+  const tiltY = useMotionValue(0)
+  const glowX = useMotionValue(50)
+  const glowY = useMotionValue(50)
+
+  const rotateX = useSpring(tiltX, { stiffness: 200, damping: 20 })
+  const rotateY = useSpring(tiltY, { stiffness: 200, damping: 20 })
+
+  const glowBackground = useMotionTemplate`radial-gradient(circle at ${glowX}% ${glowY}%, rgba(150,150,150,0.12) 0%, transparent 55%)`
+
+  const handleMouseMove = (e) => {
+    if (!ref.current) return
+    const rect = ref.current.getBoundingClientRect()
+    const centerX = rect.left + rect.width / 2
+    const centerY = rect.top + rect.height / 2
+    const mouseX = e.clientX - centerX
+    const mouseY = e.clientY - centerY
+
+    const maxTilt = 8
+    tiltX.set(-(mouseY / (rect.height / 2)) * maxTilt)
+    tiltY.set((mouseX / (rect.width / 2)) * maxTilt)
+
+    glowX.set(((e.clientX - rect.left) / rect.width) * 100)
+    glowY.set(((e.clientY - rect.top) / rect.height) * 100)
+  }
+
+  const handleMouseEnter = () => setIsHovered(true)
+
+  const handleMouseLeave = () => {
+    setIsHovered(false)
+    tiltX.set(0)
+    tiltY.set(0)
+    glowX.set(50)
+    glowY.set(50)
+  }
+
+  return (
+    <motion.div
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      whileTap={{ scale: 0.97 }}
+      transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+      style={{
+        rotateX,
+        rotateY,
+        transformStyle: 'preserve-3d',
+        perspective: 1000,
+      }}
+      className={`${className} h-full`}
+    >
+      <div className="relative overflow-hidden h-full">
+        <motion.div
+          className="pointer-events-none absolute inset-0 z-10 transition-opacity duration-300"
+          style={{ background: glowBackground, opacity: isHovered ? 1 : 0 }}
+        />
+        {children}
+      </div>
+    </motion.div>
+  )
+}
+
 function Projects() {
   const { t, i18n } = useTranslation()
+  const scrollRef = useRef(null)
+  const isMobile = useIsMobile()
+
+  useEffect(() => {
+    const el = scrollRef.current
+    if (!el) return
+    const cards = el.querySelectorAll('[data-project-card]')
+    if (!cards.length) return
+
+    // Reset heights
+    cards.forEach(c => c.style.minHeight = '')
+
+    // Only equalize heights on mobile (carousel)
+    if (isMobile) {
+      const maxH = Math.max(...Array.from(cards).map(c => c.offsetHeight))
+      cards.forEach(c => c.style.minHeight = `${maxH}px`)
+    }
+  }, [i18n.language, isMobile])
 
   return (
     <section id={i18n.language === 'es' ? 'proyectos' : 'projects'} className="py-24 md:py-32 bg-neutral-50">
-      <div className="max-w-4xl mx-auto px-6">
+      <div className="max-w-4xl mx-auto md:px-6">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -417,83 +532,109 @@ function Projects() {
         >
           <motion.h2
             variants={fadeUp}
-            className="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-12"
+            className="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-12 px-6 md:px-0"
           >
             {t('projects.title')}
           </motion.h2>
 
-          <div className="grid gap-8">
+          {/* Mobile: horizontal carousel / Desktop: vertical grid */}
+          <div ref={scrollRef} className="flex overflow-x-auto snap-x snap-mandatory gap-6 px-6 pb-4 md:grid md:gap-8 md:overflow-visible md:snap-none md:px-0 md:pb-0 scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}>
             {projects.map((project) => (
-              <motion.article
-                key={project.title}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-50px" }}
-                variants={fadeUp}
-                className="group border border-neutral-200 hover:border-neutral-400 transition-colors overflow-hidden"
-              >
-                {/* Color accent line */}
-                <motion.div
-                  variants={lineReveal}
-                  className="h-1 origin-left"
-                  style={{ backgroundColor: project.color }}
-                />
+              <TiltCard key={project.title} className="group w-[calc(100vw-48px)] shrink-0 snap-center md:w-auto md:shrink">
+                <motion.article
+                  data-project-card
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-50px" }}
+                  variants={fadeUp}
+                  className="border border-neutral-200 group-hover:border-neutral-400 transition-colors overflow-hidden bg-neutral-50 h-full flex flex-col"
+                >
+                  {/* Color accent line */}
+                  <motion.div
+                    variants={lineReveal}
+                    className="h-1 origin-left shrink-0"
+                    style={{ backgroundColor: project.color }}
+                  />
 
-                {/* Content */}
-                <div className="p-6 md:p-8">
-                    <div className="flex flex-col h-full">
-                      <div className="flex-1">
-                        <h3 className="font-heading text-xl font-semibold mb-3 group-hover:text-neutral-600 transition-colors">
-                          {project.title}
-                        </h3>
-                        <p className="text-neutral-600 mb-4 leading-relaxed">
-                          {t(project.descriptionKey)}
-                        </p>
+                  {/* Content */}
+                  <div className="p-6 md:p-8 flex flex-col flex-1">
+                    <div className="flex-1">
+                      <h3 className="font-heading text-xl font-semibold mb-3 group-hover:text-neutral-600 transition-colors">
+                        {project.title}
+                      </h3>
+                      <p className="text-neutral-600 mb-4 leading-relaxed">
+                        {t(project.descriptionKey)}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col gap-4 mt-auto pt-4">
+                      <div className="flex flex-wrap gap-2">
+                        {project.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="px-3 py-1 text-xs text-neutral-500 border border-neutral-200"
+                          >
+                            {tag}
+                          </span>
+                        ))}
                       </div>
 
-                      <div className="flex flex-wrap items-center justify-between gap-4 mt-4">
-                        <div className="flex flex-wrap gap-2">
-                          {project.tags.map((tag) => (
-                            <span
-                              key={tag}
-                              className="px-3 py-1 text-xs text-neutral-500 border border-neutral-200"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-
-                        <div className="flex items-center gap-3">
-                          {project.demo && (
-                            <a
-                              href={project.demo}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-neutral-700 border border-neutral-300 hover:border-neutral-400 hover:bg-neutral-100 transition-colors"
-                            >
-                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                              </svg>
-                              {t('projects.viewDemo')}
-                            </a>
-                          )}
+                      <div className="flex items-center gap-3">
+                        {project.demo && (
                           <a
-                            href={project.github}
+                            href={project.demo}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-neutral-700 border border-neutral-300 hover:border-neutral-400 hover:bg-neutral-100 transition-colors"
                           >
-                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                              <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                             </svg>
-                            {t('projects.viewCode')}
+                            {t('projects.viewDemo')}
                           </a>
-                        </div>
+                        )}
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-neutral-700 border border-neutral-300 hover:border-neutral-400 hover:bg-neutral-100 transition-colors"
+                        >
+                          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                            <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
+                          </svg>
+                          {t('projects.viewCode')}
+                        </a>
                       </div>
                     </div>
                   </div>
-              </motion.article>
+                </motion.article>
+              </TiltCard>
             ))}
+          </div>
+
+          {/* Swipe hint - mobile only */}
+          <div className="flex items-center justify-center gap-3 text-neutral-400 text-sm mt-6 px-6 md:hidden">
+            <motion.svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              animate={{ x: [0, -4, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+            </motion.svg>
+            <span>{t('projects.swipeHint')}</span>
+            <motion.svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              animate={{ x: [0, 4, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </motion.svg>
           </div>
         </motion.div>
       </div>
@@ -794,9 +935,12 @@ function Contact() {
 function Footer() {
   return (
     <footer className="py-8 border-t border-neutral-200 bg-neutral-50">
-      <div className="max-w-4xl mx-auto px-6 text-center">
+      <div className="max-w-4xl mx-auto px-6 flex flex-col items-center gap-2">
         <p className="text-sm text-neutral-500">
-          © {new Date().getFullYear()} Nicolás Ramírez
+          © Nicolás Ramírez – {new Date().getFullYear()}
+        </p>
+        <p className="text-xs text-neutral-400">
+          Rosario, Argentina
         </p>
       </div>
     </footer>

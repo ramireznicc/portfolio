@@ -25,6 +25,7 @@
     "title": "Proyectos",
     "viewDemo": "Ver demo",
     "viewCode": "Ver código",
+    "swipeHint": "Deslizá para ver más",
     "items": {
       "sooma": {
         "description": "Sitio web corporativo para ofrecer servicios de soporte IT a empresas y particulares."

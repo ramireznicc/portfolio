@@ -25,6 +25,7 @@
     "title": "Projects",
     "viewDemo": "View demo",
     "viewCode": "View code",
+    "swipeHint": "Swipe for more",
     "items": {
       "sooma": {
         "description": "Corporate website offering IT support services to businesses and individuals."
