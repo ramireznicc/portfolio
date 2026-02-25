@@ -45,6 +45,14 @@ function LanguageSwitcher({ onLanguageChange }) {
 
 const projects = [
   {
+    title: 'Spicy',
+    descriptionKey: 'projects.items.spicy.description',
+    tags: ['React', 'Game', 'Vite'],
+    github: 'https://github.com/ramireznicc/spicy',
+    demo: 'https://spicy-game.netlify.app/',
+    color: '#FC5F12',
+  },
+  {
     title: 'Sooma Works',
     descriptionKey: 'projects.items.sooma.description',
     tags: ['React', 'Web Design', 'UI/UX'],
@@ -98,14 +106,6 @@ const projects = [
     github: 'https://github.com/ramireznicc/typing-game',
     demo: 'https://the-typing-game.netlify.app/',
     color: '#447D6D',
-  },
-  {
-    title: 'Spicy',
-    descriptionKey: 'projects.items.spicy.description',
-    tags: ['React', 'Game', 'Vite'],
-    github: 'https://github.com/ramireznicc/spicy',
-    demo: 'https://spicy-game.netlify.app/',
-    color: '#FC5F12',
   },
 ]
 
