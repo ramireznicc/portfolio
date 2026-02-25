@@ -47,6 +47,9 @@
       },
       "typing": {
         "description": "Typing practice game with different difficulty levels and statistics."
+      },
+      "spicy": {
+        "description": "Multiplayer card game with categories (truth, dare, fantasy) and progressive spice levels."
       }
     }
   },

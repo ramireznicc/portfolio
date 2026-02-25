@@ -47,6 +47,9 @@
       },
       "typing": {
         "description": "Juego para practicar mecanografía con diferentes niveles de dificultad y estadísticas."
+      },
+      "spicy": {
+        "description": "Juego de cartas multijugador con categorías (verdad, reto, fantasía) y niveles de picante progresivos."
       }
     }
   },
