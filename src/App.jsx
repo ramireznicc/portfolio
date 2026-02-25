@@ -303,11 +303,17 @@ function Hero() {
 
               {/* Photo container */}
               <div className="absolute inset-2 bg-neutral-50 rounded-[1.5rem] overflow-hidden">
-                <img
-                  src="/cv-bw.jpg"
-                  alt="Nicolás Ramírez"
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
-                />
+                <picture>
+                  <source srcSet="/cv-bw.webp" type="image/webp" />
+                  <img
+                    src="/cv-bw-opt.jpg"
+                    alt="Nicolás Ramírez"
+                    width={800}
+                    height={935}
+                    fetchPriority="high"
+                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                  />
+                </picture>
               </div>
 
             </div>
