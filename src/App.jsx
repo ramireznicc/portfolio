@@ -555,7 +555,7 @@ function Projects() {
           </motion.h2>
 
           {/* Mobile: horizontal carousel / Desktop: vertical grid */}
-          <div ref={scrollRef} className="flex overflow-x-auto snap-x snap-mandatory gap-6 px-6 pb-4 md:grid md:gap-8 md:overflow-visible md:snap-none md:px-0 md:pb-0 scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}>
+          <div ref={scrollRef} className="flex overflow-x-auto snap-x snap-mandatory gap-6 px-6 pb-4 md:grid md:gap-8 md:overflow-visible md:snap-none md:px-0 md:pb-0 scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             {projects.map((project) => (
               <TiltCard key={project.title} className="group w-[calc(100vw-48px)] shrink-0 snap-center md:w-auto md:shrink">
                 <motion.article
