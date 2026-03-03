@@ -157,7 +157,7 @@ function Navbar({ onLanguageChange }) {
   ]
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-neutral-50/90 backdrop-blur-md border-b border-neutral-200">
+    <nav className="fixed top-0 left-0 right-0 z-50 md:bg-neutral-50/90 md:backdrop-blur-md md:border-b md:border-neutral-200">
       <div className="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Desktop: centered nav */}
         <div className="hidden md:flex items-center gap-12 flex-1 justify-center">
@@ -173,14 +173,14 @@ function Navbar({ onLanguageChange }) {
           ))}
         </div>
 
-        {/* Language switcher - always visible */}
-        <div className="absolute left-6 md:left-auto md:right-6 md:relative">
+        {/* Language switcher - desktop only */}
+        <div className="hidden md:block md:absolute md:right-6">
           <LanguageSwitcher onLanguageChange={onLanguageChange} />
         </div>
 
-        {/* Mobile: hamburger */}
+        {/* Mobile: hamburger pill */}
         <button
-          className="md:hidden absolute right-6 p-2"
+          className="md:hidden fixed top-4 right-4 flex items-center justify-center p-2.5 bg-neutral-50/90 backdrop-blur-md border border-neutral-200 shadow-md"
           onClick={() => setIsOpen(!isOpen)}
         >
           <div className="w-5 h-4 flex flex-col justify-between">
@@ -198,7 +198,7 @@ function Navbar({ onLanguageChange }) {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="md:hidden border-t border-neutral-200 bg-neutral-50 overflow-hidden"
+            className="md:hidden fixed top-[4.5rem] right-4 w-56 bg-neutral-50 border border-neutral-200 shadow-xl overflow-hidden z-50"
           >
             <div className="px-6 py-4 flex flex-col gap-4">
               {navItems.map((item, index) => (
@@ -225,6 +225,9 @@ function Navbar({ onLanguageChange }) {
                   {t(`nav.${item.key}`)}
                 </motion.a>
               ))}
+              <div className="pt-3 border-t border-neutral-100 flex">
+                <LanguageSwitcher onLanguageChange={onLanguageChange} />
+              </div>
             </div>
           </motion.div>
         )}
@@ -273,7 +276,7 @@ function Hero() {
   }, [displayText, isDeleting, roleIndex, roles])
 
   return (
-    <section className="min-h-screen flex items-center pt-16 relative overflow-hidden">
+    <section className="h-dvh flex items-center pt-16 pb-16 md:pb-0 relative overflow-hidden">
       {/* Animated monochrome gradient */}
       <motion.div
         className="absolute inset-0 pointer-events-none"
@@ -293,21 +296,21 @@ function Hero() {
         }}
       />
 
-      <div className="max-w-5xl mx-auto px-6 py-24 md:py-32 w-full relative z-10">
+      <div className="max-w-5xl mx-auto px-6 py-8 md:py-32 w-full relative z-10">
         <motion.div
           initial="hidden"
           animate="visible"
           variants={{
             visible: { transition: { staggerChildren: 0.15 } }
           }}
-          className="flex flex-col md:flex-row items-center gap-14 md:gap-20"
+          className="flex flex-col md:flex-row items-center gap-6 md:gap-20"
         >
           {/* Photo with innovative design */}
           <motion.div
             variants={fadeUp}
             className="relative group"
           >
-            <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96">
+            <div className="relative w-52 h-52 md:w-80 md:h-80 lg:w-96 lg:h-96">
               {/* Animated gradient border */}
               <div className="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-600 to-neutral-400 rounded-[2rem] rotate-6 group-hover:rotate-12 transition-transform duration-500" />
               <div className="absolute inset-0 bg-gradient-to-tr from-neutral-400 via-neutral-600 to-neutral-900 rounded-[2rem] -rotate-6 group-hover:-rotate-12 transition-transform duration-500 opacity-50" />
@@ -341,28 +344,28 @@ function Hero() {
 
             <motion.h1
               variants={fadeUp}
-              className="font-heading text-6xl md:text-8xl font-bold tracking-tight mb-8"
+              className="font-heading text-5xl md:text-8xl font-bold tracking-tight mb-4 md:mb-8"
             >
               Nicolás Ramírez
             </motion.h1>
 
             <motion.p
               variants={fadeUp}
-              className="text-xl text-neutral-600 mb-10 max-w-lg leading-relaxed"
+              className="text-base md:text-xl text-neutral-600 mb-6 md:mb-10 max-w-lg leading-relaxed"
             >
               {t('hero.tagline')}<br />{t('hero.tagline2')}
             </motion.p>
 
-            <motion.div variants={fadeUp} className="flex gap-5 flex-wrap justify-center md:justify-start mb-8">
+            <motion.div variants={fadeUp} className="flex gap-5 flex-wrap justify-center md:justify-start mb-4 md:mb-8">
               <a
                 href={i18n.language === 'es' ? '#proyectos' : '#projects'}
-                className="px-8 py-4 bg-neutral-900 text-white font-medium hover:bg-neutral-700 transition-colors"
+                className="px-6 py-3 md:px-8 md:py-4 bg-neutral-900 text-white font-medium hover:bg-neutral-700 transition-colors"
               >
                 {t('hero.viewProjects')}
               </a>
               <a
                 href={i18n.language === 'es' ? '#contacto' : '#contact'}
-                className="px-8 py-4 border border-neutral-300 font-medium hover:border-neutral-900 transition-colors"
+                className="px-6 py-3 md:px-8 md:py-4 border border-neutral-300 font-medium hover:border-neutral-900 transition-colors"
               >
                 {t('hero.contact')}
               </a>
