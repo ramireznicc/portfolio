@@ -45,6 +45,15 @@ function LanguageSwitcher({ onLanguageChange }) {
 
 const projects = [
   {
+    title: 'Voice Commands',
+    descriptionKey: 'projects.items.voice.description',
+    tags: ['Python', 'Linux', 'GTK4'],
+    github: 'https://github.com/ramireznicc/voice-commands',
+    color: '#9B7FD4',
+    poweredByClaude: true,
+    category: 'system',
+  },
+  {
     title: 'Spicy',
     descriptionKey: 'projects.items.spicy.description',
     tags: ['React', 'Game', 'Vite'],
@@ -52,6 +61,7 @@ const projects = [
     demo: 'https://spicy-game.netlify.app/',
     color: '#FC5F12',
     poweredByClaude: true,
+    category: 'web',
   },
   {
     title: 'Sooma Works',
@@ -61,6 +71,7 @@ const projects = [
     demo: 'https://soomaworks.com/',
     color: '#554C64',
     poweredByClaude: true,
+    category: 'web',
   },
   {
     title: 'Simpsons for Fun',
@@ -70,6 +81,7 @@ const projects = [
     demo: 'https://simpsons-for-fun.netlify.app/',
     color: '#FDD427',
     poweredByClaude: true,
+    category: 'web',
   },
   {
     title: 'System Monitor',
@@ -77,6 +89,7 @@ const projects = [
     tags: ['Python', 'Linux', 'CLI'],
     github: 'https://github.com/ramireznicc/monitor',
     color: '#6CB9D8',
+    category: 'system',
   },
   {
     title: 'Get Growing',
@@ -85,6 +98,7 @@ const projects = [
     github: 'https://github.com/ramireznicc/get-growing',
     demo: 'https://get-growing.netlify.app/',
     color: '#A0C088',
+    category: 'web',
   },
   {
     title: 'Pokedex',
@@ -93,6 +107,7 @@ const projects = [
     github: 'https://github.com/ramireznicc/pokedex',
     demo: 'https://pokedex-x23.netlify.app/',
     color: '#B94A49',
+    category: 'web',
   },
   {
     title: 'Taldea',
@@ -101,6 +116,7 @@ const projects = [
     github: 'https://github.com/ramireznicc/taldea',
     demo: 'https://taldea.netlify.app/',
     color: '#7C8654',
+    category: 'web',
   },
   {
     title: 'The Typing Game',
@@ -109,6 +125,7 @@ const projects = [
     github: 'https://github.com/ramireznicc/typing-game',
     demo: 'https://the-typing-game.netlify.app/',
     color: '#447D6D',
+    category: 'web',
   },
 ]
 
@@ -522,6 +539,11 @@ function Projects() {
   const { t, i18n } = useTranslation()
   const scrollRef = useRef(null)
   const isMobile = useIsMobile()
+  const [activeFilter, setActiveFilter] = useState('all')
+
+  const filteredProjects = activeFilter === 'all'
+    ? projects
+    : projects.filter(p => p.category === activeFilter)
 
   useEffect(() => {
     const el = scrollRef.current
@@ -537,7 +559,7 @@ function Projects() {
       const maxH = Math.max(...Array.from(cards).map(c => c.offsetHeight))
       cards.forEach(c => c.style.minHeight = `${maxH}px`)
     }
-  }, [i18n.language, isMobile])
+  }, [i18n.language, isMobile, activeFilter])
 
   return (
     <section id={i18n.language === 'es' ? 'proyectos' : 'projects'} className="py-24 md:py-32 bg-neutral-50">
@@ -550,16 +572,34 @@ function Projects() {
             visible: { transition: { staggerChildren: 0.1 } }
           }}
         >
-          <motion.h2
-            variants={fadeUp}
-            className="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-12 px-6 md:px-0"
-          >
-            {t('projects.title')}
-          </motion.h2>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-12 px-6 md:px-0">
+            <motion.h2
+              variants={fadeUp}
+              className="font-heading text-3xl md:text-4xl font-bold tracking-tight"
+            >
+              {t('projects.title')}
+            </motion.h2>
+
+            <motion.div variants={fadeUp} className="flex gap-2">
+              {['all', 'web', 'system'].map((filter) => (
+                <button
+                  key={filter}
+                  onClick={() => setActiveFilter(filter)}
+                  className={`px-4 py-1.5 text-sm border transition-colors cursor-pointer ${
+                    activeFilter === filter
+                      ? 'bg-neutral-900 text-white border-neutral-900'
+                      : 'text-neutral-500 border-neutral-200 hover:border-neutral-400'
+                  }`}
+                >
+                  {t(`projects.filter.${filter}`)}
+                </button>
+              ))}
+            </motion.div>
+          </div>
 
           {/* Mobile: horizontal carousel / Desktop: vertical grid */}
           <div ref={scrollRef} className="flex overflow-x-auto snap-x snap-mandatory gap-6 px-6 pb-4 md:grid md:gap-8 md:overflow-visible md:snap-none md:px-0 md:pb-0 scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-            {projects.map((project) => (
+            {filteredProjects.map((project) => (
               <TiltCard key={project.title} className="group w-[calc(100vw-48px)] shrink-0 snap-center md:w-auto md:shrink">
                 <motion.article
                   data-project-card

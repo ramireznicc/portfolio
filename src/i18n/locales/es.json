@@ -26,12 +26,20 @@
     "viewDemo": "Ver demo",
     "viewCode": "Ver código",
     "swipeHint": "Deslizá para ver más",
+    "filter": {
+      "all": "Todos",
+      "web": "Web Apps",
+      "system": "Sistema"
+    },
     "items": {
       "sooma": {
         "description": "Sitio web corporativo para ofrecer servicios de soporte IT a empresas y particulares."
       },
       "simpsons": {
         "description": "Buscador de capítulos de Los Simpsons con recomendador y lista para llevar registro de los episodios vistos."
+      },
+      "voice": {
+        "description": "Sidebar para GNOME que reconoce comandos de voz en español y los ejecuta."
       },
       "monitor": {
         "description": "Herramienta de monitoreo de sistema para visualizar métricas de rendimiento en tiempo real."
