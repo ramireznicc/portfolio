@@ -58,6 +58,9 @@
       },
       "spicy": {
         "description": "Spicy card game for couples or friend groups, with dares, questions and fantasies that heat up as you play."
+      },
+      "km21": {
+        "description": "Personal training tracker for running a 21K race, with persistent progress, countdown to race day and daily automated email."
       }
     }
   },

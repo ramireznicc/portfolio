@@ -45,6 +45,16 @@ function LanguageSwitcher({ onLanguageChange }) {
 
 const projects = [
   {
+    title: '21km',
+    descriptionKey: 'projects.items.km21.description',
+    tags: ['React', 'Vite', 'GitHub Actions'],
+    github: 'https://github.com/ramireznicc/21km',
+    demo: 'https://21km.netlify.app',
+    color: '#3CB371',
+    poweredByClaude: true,
+    category: 'web',
+  },
+  {
     title: 'Voice Commands',
     descriptionKey: 'projects.items.voice.description',
     tags: ['Python', 'Linux', 'GTK4'],

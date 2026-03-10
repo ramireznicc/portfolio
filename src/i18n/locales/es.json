@@ -58,6 +58,9 @@
       },
       "spicy": {
         "description": "Juego de cartas picante para parejas o grupos de amigos, con retos, preguntas y fantasías que suben de intensidad."
+      },
+      "km21": {
+        "description": "Tracker personal de entrenamiento para correr 21 km, con progreso persistente, cuenta regresiva y email diario automático."
       }
     }
   },
