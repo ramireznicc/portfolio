@@ -29,7 +29,8 @@
     "filter": {
       "all": "All",
       "web": "Web Apps",
-      "system": "System"
+      "system": "System",
+      "mobile": "Mobile"
     },
     "items": {
       "sooma": {
@@ -61,6 +62,9 @@
       },
       "km21": {
         "description": "Personal training tracker for running a 21K race, with persistent progress, countdown to race day and daily automated email."
+      },
+      "mytunes": {
+        "description": "Android app with chromatic tuner and metronome, fully offline, built with Expo."
       }
     }
   },

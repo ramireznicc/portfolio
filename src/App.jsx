@@ -45,6 +45,15 @@ function LanguageSwitcher({ onLanguageChange }) {
 
 const projects = [
   {
+    title: 'My Tunes',
+    descriptionKey: 'projects.items.mytunes.description',
+    tags: ['React Native', 'Expo', 'Android'],
+    github: 'https://github.com/ramireznicc/my-tunes',
+    color: '#1DB954',
+    poweredByClaude: true,
+    category: 'mobile',
+  },
+  {
     title: '21km',
     descriptionKey: 'projects.items.km21.description',
     tags: ['React', 'Vite', 'GitHub Actions'],
@@ -591,7 +600,7 @@ function Projects() {
             </motion.h2>
 
             <motion.div variants={fadeUp} className="flex gap-2">
-              {['all', 'web', 'system'].map((filter) => (
+              {['all', 'web', 'system', 'mobile'].map((filter) => (
                 <button
                   key={filter}
                   onClick={() => setActiveFilter(filter)}

@@ -29,7 +29,8 @@
     "filter": {
       "all": "Todos",
       "web": "Web Apps",
-      "system": "Sistema"
+      "system": "Sistema",
+      "mobile": "Móvil"
     },
     "items": {
       "sooma": {
@@ -61,6 +62,9 @@
       },
       "km21": {
         "description": "Tracker personal de entrenamiento para correr 21 km, con progreso persistente, cuenta regresiva y email diario automático."
+      },
+      "mytunes": {
+        "description": "App Android con afinador cromático y metrónomo, sin conexión a internet, construida con Expo."
       }
     }
   },
